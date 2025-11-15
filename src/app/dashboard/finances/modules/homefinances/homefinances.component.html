@@ -41,14 +41,14 @@
     </section>
 
     <!-- Bills -->
-    <section class="me-card main-background">
+    <!-- <section class="me-card main-background">
         <div class="header">
             <h4>Daily Bills</h4>
             <i class="pi pi-cog"></i>
         </div> 
-        <!-- Graphic -->
+        <!- Graphic ->
         <app-billsgraphic></app-billsgraphic>
-    </section>
+    </section> -->
 
     <!-- Objetive -->
     <section class="objetive-container main-background">
@@ -60,6 +60,18 @@
     <section class="debts-container main-background">
         <h4>Debts</h4>
         <app-debts />
+    </section>
+
+    <!-- Subscriptions -->
+    <section class="subscriptions-container main-background">
+        <div class="header">
+            <h4>Subscriptions</h4>
+            <button class="btn btn-blue btn-add" (click)="openAddSubscriptionForm()">
+                <i class="fa-solid fa-plus"></i>
+                <span>Add</span>
+            </button>
+        </div>
+        <app-subscriptions></app-subscriptions>
     </section>
 
 </div>

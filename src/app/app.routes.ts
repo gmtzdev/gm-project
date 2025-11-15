@@ -12,11 +12,20 @@ import { ShowincomesComponent } from './dashboard/finances/modules/showincomes/s
 import { ShowbillsComponent } from './dashboard/finances/modules/showbills/showbills.component';
 import { EditbillComponent } from './dashboard/finances/modules/editbill/editbill.component';
 import { TodolistComponent } from './dashboard/home/modules/todolist/todolist.component';
+import { LoginComponent } from './auth/login/login.component';
+import { authGuard } from './auth/guards/auth.guard';
+import { guestGuard } from './auth/guards/guest.guard';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [guestGuard]
+  },
+  {
+    path: 'dashboard',
     component: MainComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -40,4 +49,13 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '/login'
+  }
 ];

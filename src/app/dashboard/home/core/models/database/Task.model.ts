@@ -13,6 +13,16 @@ export class Task {
   public deleted_at: Date;
   public list!: List;
   //   public categories!: CategoryTask[];
+  
+  // Schedule fields
+  public startTime?: string;
+  public endTime?: string;
+  
+  // Repeat fields
+  public repeatType?: 'daily' | 'weekly' | 'monthly' | 'yearly' | 'workdays' | 'weekends' | 'custom';
+  public repeatInterval?: number;
+  public repeatUntil?: Date;
+  public customDays?: string[];
 
   constructor(task: Task) {
     this.id = task.id;
@@ -25,5 +35,11 @@ export class Task {
     this.created_at = task.created_at;
     this.updated_at = task.updated_at;
     this.deleted_at = task.deleted_at;
+    this.startTime = task.startTime;
+    this.endTime = task.endTime;
+    this.repeatType = task.repeatType;
+    this.repeatInterval = task.repeatInterval;
+    this.repeatUntil = task.repeatUntil;
+    this.customDays = task.customDays;
   }
 }

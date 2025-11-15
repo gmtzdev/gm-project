@@ -1,5 +1,9 @@
 <section class="tasks">
-    <div class="date">{{day}}</div>
+    <div class="header-tasks">
+        <div class="date">{{day}}</div>
+        <button (click)="openTaskForm()" >Add Task</button>
+    </div>
+
     <div class="container-tasks">
         <div class="task">
             <div class="timestart">

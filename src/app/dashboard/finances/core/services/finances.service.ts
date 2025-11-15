@@ -14,12 +14,14 @@ import { CreateCategoryDto } from '../dto/category/create-category.dto';
 import { CreateInstitutionDto } from '../dto/institution/create-institution.dto';
 import { UpdateBillDto } from '../dto/bill/update-bill.dto';
 import { ContributionDto } from '../dto/contribution/create-contribution.dto';
+import { environment } from '../../../../../environment/environment';
+import { CreateSubscriptionDto } from '../dto/subscription/create-subscription.dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FinancesService {
-  private URL: string = 'http://localhost:1612/finances';
+  private URL: string = `${environment.serever}:${environment.port}/finances`;
 
   constructor(private http: HttpClient, private datesService: DatesService) {}
 
@@ -165,6 +167,15 @@ export class FinancesService {
       `${this.URL}/contribution`,
       contribution
     );
+  }
+
+
+  // Subscription
+  public createSubscription(subscription: CreateSubscriptionDto): Observable<HttpResponse> {
+    return this.http.post<HttpResponse>(`${this.URL}/subscription`, subscription);
+  }
+  public getSubscriptions(): Observable<HttpResponse> {
+    return this.http.get<HttpResponse>(`${this.URL}/subscription`);
   }
 
   // Utils

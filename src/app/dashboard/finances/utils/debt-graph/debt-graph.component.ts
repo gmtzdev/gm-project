@@ -17,7 +17,7 @@ export class DebtGraphComponent {
   @Input({ required: true }) accumulatedAmount: number = 0;
   subtitle: string = '';
 
-  private ROOT_PATH: string = '/assets/png/percentage.png';
+  private ROOT_PATH: string = 'assets/png/percentage.png';
 
   public dom!: HTMLDivElement;
   public myChart!: echarts.ECharts;

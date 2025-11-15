@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 1012",
-    "build": "ng build",
+    "build": "ng build --base-href /gm-project/ --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prepare": "husky"

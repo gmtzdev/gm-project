@@ -3,12 +3,13 @@ import { map, Observable } from 'rxjs';
 import { List } from '../models/database/List.model';
 import { HttpClient } from '@angular/common/http';
 import { HttpResponse } from '../../../../shared/models/http/HttpResponse.model';
+import { environment } from '../../../../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ListService {
-  private readonly URL = `http://localhost:1612/productivity/list`;
+  private readonly URL = `${environment.serever}:${environment.port}/productivity/list`;
   constructor(private http: HttpClient) {}
 
   public getAllList(): Observable<List[]> {

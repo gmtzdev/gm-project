@@ -1,13 +1,31 @@
 .tasks {
     height: 100%;
 
-    .date {
-        font-weight: bold;
-        font-size: 11px;
-        padding-top: 5px;
-        padding-left: 10px;
-        text-transform: capitalize;
+    .header-tasks{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 10px 0px 10px;
+
+        .date {
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: capitalize;
+        }
+
+        button{
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 5px 10px;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
     }
+
+    
 
     .container-tasks {
         padding: 7px 10px;

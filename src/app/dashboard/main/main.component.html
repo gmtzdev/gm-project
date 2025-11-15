@@ -15,6 +15,20 @@
             </app-navitem>
             }
         </nav>
+
+        <!-- Logout Button -->
+        <div class="logout-container">
+            <button 
+                class="logout-btn" 
+                (click)="logout()" 
+                [title]="collapse ? 'Logout' : 'Logout'"
+                aria-label="Logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                @if(!collapse) {
+                    <span class="logout-text">Logout</span>
+                }
+            </button>
+        </div>
     </section>
 
     <!-- Dashboard -->

@@ -54,6 +54,8 @@ export class ShowbillsComponent {
   cards!: Card[];
   payments!: { id: number; name: string }[];
   paymentsOptions: string[] = [];
+  categories!: { id: number; name: string }[];
+  categoriesOptions: string[] = [];
   loading: boolean = true;
   activityValues: number[] = [0, 100];
   public globalFilterOptions: string[] = [
@@ -151,6 +153,19 @@ export class ShowbillsComponent {
         sequence: 3,
       },
     ];
+
+    this.financesServices.getCartegories().subscribe({
+      next: (responseCategories: HttpResponse) => {
+        if (!responseCategories.success) {
+          // Error
+          return;
+        }
+        this.categories = responseCategories.data as Payment[];
+        this.categories.forEach((category) => {
+          this.categoriesOptions.push(category.name);
+        });
+      },
+    });
   }
 
   public getSeverity(status: string | number): Tag['severity'] {
@@ -184,7 +199,7 @@ export class ShowbillsComponent {
   }
 
   public editBill(id: number) {
-    this.router.navigate(['finances', 'editBills', id]);
+    this.router.navigate(['dashboard', 'finances', 'editBills', id]);
   }
 
   public navigateTo(destination: string) {

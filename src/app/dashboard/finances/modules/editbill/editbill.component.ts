@@ -306,6 +306,6 @@ export class EditbillComponent {
     this.router.navigate(['finances', 'addCard']);
   }
   public addInstitution() {
-    this.router.navigate(['finances', 'addInstitution']);
+    this.router.navigate(['../../', 'addInstitution'], { relativeTo: this.activatedRoute });
   }
 }

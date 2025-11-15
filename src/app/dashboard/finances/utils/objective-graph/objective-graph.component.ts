@@ -17,7 +17,7 @@ export class ObjectiveGraphComponent implements OnInit {
   @Input({ required: true }) accumulatedAmount: number = 0;
   subtitle: string = '';
 
-  private ROOT_PATH = '/assets/png/percentage.png';
+  private ROOT_PATH = 'assets/png/percentage.png';
 
   public dom!: HTMLDivElement;
   public myChart!: echarts.ECharts;

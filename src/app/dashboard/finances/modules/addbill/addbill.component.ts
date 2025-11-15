@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 import { Institution } from '../../core/models/database/Institution.model';
 import { Category } from '../../core/models/database/Category.model';
 import { Payment } from '../../core/models/database/Payment.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Card } from '../../core/models/database/Card.model';
 import { BankCardComponent } from '../../../../components/utils/bank-card/bank-card.component';
 import { SuccessModal } from '../../../../shared/classes/modals/SuccessModal';
@@ -50,7 +50,8 @@ export class AddbillComponent implements OnInit {
   constructor(
     private financesService: FinancesService,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private readonly activatedRoute: ActivatedRoute
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -242,6 +243,6 @@ export class AddbillComponent implements OnInit {
     this.router.navigate(['finances', 'addCard']);
   }
   public addInstitution() {
-    this.router.navigate(['finances', 'addInstitution']);
+    this.router.navigate(['../', 'addInstitution'], { relativeTo: this.activatedRoute });
   }
 }

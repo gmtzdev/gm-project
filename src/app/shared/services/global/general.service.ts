@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '../../models/http/HttpResponse.model';
+import { environment } from '../../../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GeneralService {
-  private URL: string = 'http://localhost:1612';
+  private URL: string = `${environment.serever}:${environment.port}`;
 
   constructor(private http: HttpClient) {}
 

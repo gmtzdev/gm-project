@@ -4,7 +4,6 @@ import { CardComponent } from '../../components/card/card.component';
 import { IncomesyearComponent } from '../../components/incomesyear/incomesyear.component';
 import { ObjetivesComponent } from '../../components/objetives/objetives.component';
 import { BillscategoryComponent } from '../../components/billscategory/billscategory.component';
-import { BillsgraphicComponent } from '../../components/billsgraphic/billsgraphic.component';
 import { CardHome } from '../../core/models/CardHome.model';
 import { FinancesService } from '../../core/services/finances.service';
 import { concatMap, map, of } from 'rxjs';
@@ -14,6 +13,9 @@ import { HttpResponse } from '../../../../shared/models/http/HttpResponse.model'
 import { ExpensesweekComponent } from '../../components/expensesweek/expensesweek.component';
 import { FormsModule } from '@angular/forms';
 import { DatesService } from '../../../../shared/services/global/dates.service';
+import { SubscriptionsComponent } from '../../components/subscriptions/subscriptions.component';
+import { SubscriptionModalService } from '../../components/subscriptions/modal/service/subscription-modal.service';
+import { SubscriptionFormComponent } from '../../components/subscriptions/modal/subscription-form.component';
 
 @Component({
   selector: 'app-homefinances',
@@ -24,11 +26,14 @@ import { DatesService } from '../../../../shared/services/global/dates.service';
     ExpensesweekComponent,
     ObjetivesComponent,
     BillscategoryComponent,
-    BillsgraphicComponent,
     DebtsComponent,
-
+    SubscriptionsComponent,
+    
     FormsModule,
     NgxChartsModule,
+
+    // Modals
+    SubscriptionFormComponent,
   ],
   templateUrl: './homefinances.component.html',
   styleUrl: './homefinances.component.scss',
@@ -43,7 +48,7 @@ export class HomefinancesComponent implements OnInit {
     {
       id: 1,
       icon: 'fa-sack-dollar',
-      destination: 'finances/addIncome',
+      destination: 'addIncome',
       title: 'Incomes',
       subtitle: 'year',
       subject: '$0',
@@ -52,7 +57,7 @@ export class HomefinancesComponent implements OnInit {
     {
       id: 2,
       icon: 'fa-circle-dollar-to-slot',
-      destination: 'finances/addBill',
+      destination: 'addBill',
       title: 'Bills',
       subtitle: 'year',
       subject: '$0',
@@ -83,7 +88,8 @@ export class HomefinancesComponent implements OnInit {
   constructor(
     private financesService: FinancesService,
     private datesService: DatesService,
-    private router: Router
+    private router: Router,
+    private subscriptionModalService: SubscriptionModalService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -257,6 +263,10 @@ export class HomefinancesComponent implements OnInit {
   private showBills() {
     this.router.navigate([this.router.url, 'showBills']);
   }
+  public openAddSubscriptionForm(): void {
+    this.subscriptionModalService.openCreateModal();
+  }
+
   private configAnimationInputDate() {
     const input = document.getElementById('weeklyexpense') as HTMLInputElement;
     function addFocus(this: HTMLInputElement) {

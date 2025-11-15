@@ -6,12 +6,13 @@ import { HttpResponse } from '../../../../shared/models/http/HttpResponse.model'
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { Category } from '../../../finances/core/models/database/Category.model';
 import { List } from '../models/database/List.model';
+import { environment } from '../../../../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private readonly URL = `http://localhost:1612/productivity/task`;
+  private readonly URL = `${environment.serever}:${environment.port}/productivity/task`;
 
   constructor(private readonly http: HttpClient) {}
 

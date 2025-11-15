@@ -10,7 +10,7 @@
                 <div class="title-and-btn">
                     <h4>List of Bills</h4>
                     <button class="btn btn-green" (click)="showDialog()">Analitycs</button>
-                    <button class="btn btn-red" (click)="navigateTo('finances/addBill')">
+                    <button class="btn btn-red" (click)="navigateTo('dashboard/finances/addBill')">
                         <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
@@ -101,6 +101,38 @@
                                 </ng-template>
                                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                                     <p-multiSelect [ngModel]="value" [options]="institutions" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
+
+                                        <ng-template let-option pTemplate="item">
+                                            <div class="inline-block vertical-align-middle">
+                                                <span class="ml-1 mt-1">{{ option.name }}</span>
+                                            </div>
+                                        </ng-template>
+
+                                    </p-multiSelect>
+                                </ng-template>
+                            </p-columnFilter>
+                        </div>
+                    </div>
+                </th>
+
+                <!-- Category -->
+                <th pSortableColumn="category.name" class="medium-width">
+
+                    <div class="column-header">
+
+                        <span>Category</span>
+
+                        <div class="header-icons">
+                            <p-sortIcon field="category.name"></p-sortIcon>
+                            <p-columnFilter field="category" matchMode="in" display="menu" [showMatchModes]="false"
+                                [showOperator]="false" [showAddButton]="false" class="ml-auto">
+                                <ng-template pTemplate="header">
+                                    <div class="picker-title">
+                                        <span>Category Picker</span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-multiSelect [ngModel]="value" [options]="categories" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
 
                                         <ng-template let-option pTemplate="item">
                                             <div class="inline-block vertical-align-middle">
@@ -225,6 +257,13 @@
                     width="32" style="vertical-align: middle" /> -->
                     <span class="ml-1 vertical-align-middle">{{ bill.institution.name }}</span>
                 </td>
+
+                <!-- Category -->
+                <td>
+                    <span class="p-column-title">Category</span>
+                    <span class="ml-1 vertical-align-middle">{{ bill.category.name }}</span>
+                </td>
+
 
                 <!-- Payment -->
                 <td>

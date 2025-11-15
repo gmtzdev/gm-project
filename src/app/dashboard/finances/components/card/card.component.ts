@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CardHome } from '../../core/models/CardHome.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FinancesService } from '../../core/services/finances.service';
 
 @Component({
@@ -93,6 +93,7 @@ export class CardComponent {
   constructor(
     private readonly renderer2: Renderer2,
     private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
     private readonly financesService: FinancesService
   ) {}
 
@@ -114,7 +115,8 @@ export class CardComponent {
   }
 
   navigate(destination: string) {
-    this.router.navigate([destination]);
+    // Navigate relative to the current route
+    this.router.navigate([destination], { relativeTo: this.activatedRoute });
   }
 
   public iconClick() {
