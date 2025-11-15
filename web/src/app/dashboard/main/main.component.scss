@@ -1,0 +1,220 @@
+
+.main {
+    display: grid;
+    background: linear-gradient(180deg, #061730 0%, #030b17 100%);
+    padding: 0 15px;
+
+    .navbar {
+        position: absolute;
+        z-index: 90;
+        bottom: 0px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 350px;
+        
+
+        background: rgb(255 255 255 / 10%);
+        box-shadow: 0 8px 32px 0 rgb(31 38 135 / 28%);
+        backdrop-filter: blur(30px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+
+        .logo {
+            display: none;
+        }
+
+        nav {
+            display: flex;
+            margin: 0 auto;
+        }
+
+        .logout-container {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+
+            .logout-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 8px;
+                padding: 8px 12px;
+                color: rgba(255, 255, 255, 0.8);
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 14px;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                    color: white;
+                    transform: translateY(-1px);
+                }
+
+                i {
+                    font-size: 16px;
+                }
+
+                .logout-text {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    .collapse {
+        // width: 70px;
+        // padding: 20px 0px;
+    }
+
+
+    .dash {
+        // padding-left: calc(70px + 20px);
+        // padding-right: 20px;
+        padding-top: 20px;
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .dash::-webkit-scrollbar {
+        // width: 0;
+    }
+
+    .dash-collapse {
+        // padding-left: calc(140px + 20px);
+    }
+
+    .calendar {
+        display: none;
+        // display: grid;
+        // grid-template-rows: 38% 32% 30%;
+        // height: 100vh;
+
+        // background: rgb(255 255 255 / 10%);
+        // box-shadow: 0 8px 32px 0 rgb(31 38 135 / 28%);
+        // backdrop-filter: blur(30px);
+        // border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+}
+
+@media (min-width: 1000px) {
+    .main {
+        grid-template-columns: 77% 23%;
+        padding: 0;
+    
+        .navbar {
+            position: absolute;
+            display: block;
+            width: 140px;
+            height: 100vh;
+            padding: 20px 5px;
+            top: 0px;
+            left: 0px;
+            transform: translate(0, 0);
+    
+            background: rgb(255 255 255 / 10%);
+            // background: rgba(255, 255, 255, 0.493);
+            box-shadow: 0 8px 32px 0 rgb(31 38 135 / 28%);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-top-right-radius: 10px;
+            border-top-left-radius: 0px;
+    
+            .logo {
+                display: block;
+                width: 60px;
+                font-size: 3rem;
+                margin: 0 auto;
+                margin-bottom: 10px;
+                cursor: pointer;
+            }
+    
+            nav {
+                display: grid;
+                // row-gap: 2px;
+            }
+
+            .logout-container {
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 10px);
+
+                .logout-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 8px;
+                    padding: 10px;
+                    color: rgba(255, 255, 255, 0.8);
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    font-size: 14px;
+                    width: 100%;
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.2);
+                        color: white;
+                        transform: translateY(-1px);
+                    }
+
+                    i {
+                        font-size: 16px;
+                    }
+
+                    .logout-text {
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    
+        .collapse {
+            width: 70px;
+            padding: 20px 0px;
+
+            .logout-container .logout-btn {
+                padding: 8px;
+                
+                .logout-text {
+                    display: none;
+                }
+            }
+        }
+    
+    
+        .dash {
+            padding-left: calc(70px + 20px);
+            padding-right: 20px;
+            padding-top: 20px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+    
+        .dash::-webkit-scrollbar {
+            width: 0;
+        }
+    
+        .dash-collapse {
+            padding-left: calc(140px + 20px);
+        }
+    
+        .calendar {
+            display: grid;
+            grid-template-rows: 38% 32% 30%;
+            height: 100vh;
+    
+            background: rgb(255 255 255 / 10%);
+            box-shadow: 0 8px 32px 0 rgb(31 38 135 / 28%);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+    }
+}

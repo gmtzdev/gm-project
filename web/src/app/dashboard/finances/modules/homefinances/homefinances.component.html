@@ -1,0 +1,77 @@
+<div class="container">
+    <!-- Cards -->
+    <section class="cards-container">
+        @for(card of cards; track card.id){
+        <app-card [card]="card" (onIconClicked)="changeCard($event)" (onTitleClicked)="showDetails($event)"></app-card>
+        }
+    </section>
+
+    <!-- Incomes -->
+    <section class="me-card main-background">
+        <div class="header">
+            <h4>Incomes vs Bills</h4>
+            <i class="pi pi-cog"></i>
+        </div>
+        <!-- Incomes in year -->
+        <app-incomesyear />
+    </section>
+
+    <section class="me-card main-background">
+        <div class="header">
+            <h4>Expenses for the week</h4>
+            <div class="my-input" style="width: 150px;">
+                <div class="icon">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+                <label for="created_at" style="transform: translate(60%, -50%);">Date</label>
+                <input type="date" id="weeklyexpense" class="input" [(ngModel)]="this.weeklyExpense">
+            </div>
+        </div>
+        <app-expensesweek [date]="this.weeklyExpense"/>
+    </section>
+
+    <!-- bills -->
+    <section class="me-card main-background">
+        <div class="header">
+            <h4>Categories</h4>
+            <i class="pi pi-cog"></i>
+        </div>
+        <!-- Category -->
+        <app-billscategory></app-billscategory>
+    </section>
+
+    <!-- Bills -->
+    <!-- <section class="me-card main-background">
+        <div class="header">
+            <h4>Daily Bills</h4>
+            <i class="pi pi-cog"></i>
+        </div> 
+        <!- Graphic ->
+        <app-billsgraphic></app-billsgraphic>
+    </section> -->
+
+    <!-- Objetive -->
+    <section class="objetive-container main-background">
+        <h4>Objetives</h4>
+        <app-objetives></app-objetives>
+        <button class="btn btn-blue btn-floating"><i class="fa-solid fa-plus"></i></button>
+    </section>
+
+    <section class="debts-container main-background">
+        <h4>Debts</h4>
+        <app-debts />
+    </section>
+
+    <!-- Subscriptions -->
+    <section class="subscriptions-container main-background">
+        <div class="header">
+            <h4>Subscriptions</h4>
+            <button class="btn btn-blue btn-add" (click)="openAddSubscriptionForm()">
+                <i class="fa-solid fa-plus"></i>
+                <span>Add</span>
+            </button>
+        </div>
+        <app-subscriptions></app-subscriptions>
+    </section>
+
+</div>

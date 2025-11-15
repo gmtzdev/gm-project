@@ -1,0 +1,45 @@
+<div class="main">
+    <!-- Navbar -->
+    <section class="navbar" [ngClass]="{'collapse' : collapse}">
+
+        <div class="logo" (click)="collapseVerticalMenu()">
+            <i class="fa-solid fa-gamepad"></i>
+        </div>
+
+        <nav>
+            @for(item of navitems; track item.id){
+            <app-navitem
+                [collapse]="collapse"
+                [navItem]="item" 
+                >
+            </app-navitem>
+            }
+        </nav>
+
+        <!-- Logout Button -->
+        <div class="logout-container">
+            <button 
+                class="logout-btn" 
+                (click)="logout()" 
+                [title]="collapse ? 'Logout' : 'Logout'"
+                aria-label="Logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                @if(!collapse) {
+                    <span class="logout-text">Logout</span>
+                }
+            </button>
+        </div>
+    </section>
+
+    <!-- Dashboard -->
+    <main class="dash" [ngClass]="{'dash-collapse' : !collapse}">
+        <router-outlet></router-outlet>
+    </main>
+
+    <!-- Calendar -->
+    <section class="calendar">
+        <app-calendar></app-calendar>
+        <app-tasks></app-tasks>
+        <app-widgets></app-widgets>
+    </section>
+</div>

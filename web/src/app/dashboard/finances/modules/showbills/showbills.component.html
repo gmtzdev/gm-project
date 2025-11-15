@@ -1,0 +1,334 @@
+<div style="background-color:#fff;">
+    <p-table #dt [value]="bills" [(selection)]="selectedBills" dataKey="id" [rowHover]="true" [rows]="10"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 15, 20, 25, 30, 35, 40, 45, 50]" [loading]="loading"
+        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} bills"
+        [filterDelay]="0" [globalFilterFields]="globalFilterOptions">
+
+        <ng-template pTemplate="caption">
+            <div class="table-header">
+
+                <div class="title-and-btn">
+                    <h4>List of Bills</h4>
+                    <button class="btn btn-green" (click)="showDialog()">Analitycs</button>
+                    <button class="btn btn-red" (click)="navigateTo('dashboard/finances/addBill')">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+            
+
+                <span class="p-input-icon-left">
+                    <div class="icon">
+                        <i class="pi pi-search"></i>
+                    </div>
+                    <input [(ngModel)]="globalFilter" pInputText type="text" (input)="dt.filterGlobal(globalFilter, 'contains')" placeholder="Global Search" />
+                </span>
+
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <!-- Selected -->
+                <th class="small-width">
+                    <div class="column-header-center">
+                        <p-tableHeaderCheckbox />
+                    </div>
+                </th>
+
+                <!-- Update -->
+                <th class="small-width">
+                    <div class="column-header">
+                        <span>Update</span>
+                    </div>
+                </th>
+
+                <!-- Concept -->
+                <th pSortableColumn="concept" class="medium-width">
+                    <div class="column-header">
+
+                        <span>Concept</span>
+
+                        <div class="header-icons">
+                            <p-sortIcon field="concept"></p-sortIcon>
+                            <p-columnFilter type="text" field="concept" display="menu"></p-columnFilter>
+                        </div>
+
+                    </div>
+
+                </th>
+
+                <!-- Amount -->
+                <th pSortableColumn="amount" class="medium-width">
+                    <div class="column-header">
+
+                        <span>Amount</span>
+
+                        <div class="header-icons">
+                            <p-sortIcon field="amount"></p-sortIcon>
+                            <p-columnFilter type="numeric" field="amount" display="menu"
+                                currency="MXN"></p-columnFilter>
+                        </div>
+                    </div>
+                </th>
+
+                <!-- Date -->
+                <th pSortableColumn="created_at" class="medium-width">
+                    <div class="column-header">
+                        <span>Date</span>
+
+                        <div class="header-icons">
+                            <p-sortIcon field="created_at"></p-sortIcon>
+                            <p-columnFilter type="date" field="created_at" display="menu"></p-columnFilter>
+                        </div>
+                    </div>
+                </th>
+
+                <!-- Institution -->
+                <th pSortableColumn="institution.name" class="medium-width">
+
+                    <div class="column-header">
+
+                        <span>Institution</span>
+
+                        <div class="header-icons">
+                            <p-sortIcon field="institution.name"></p-sortIcon>
+                            <p-columnFilter field="institution" matchMode="in" display="menu" [showMatchModes]="false"
+                                [showOperator]="false" [showAddButton]="false" class="ml-auto">
+                                <ng-template pTemplate="header">
+                                    <div class="picker-title">
+                                        <span>Institution Picker</span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-multiSelect [ngModel]="value" [options]="institutions" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
+
+                                        <ng-template let-option pTemplate="item">
+                                            <div class="inline-block vertical-align-middle">
+                                                <span class="ml-1 mt-1">{{ option.name }}</span>
+                                            </div>
+                                        </ng-template>
+
+                                    </p-multiSelect>
+                                </ng-template>
+                            </p-columnFilter>
+                        </div>
+                    </div>
+                </th>
+
+                <!-- Category -->
+                <th pSortableColumn="category.name" class="medium-width">
+
+                    <div class="column-header">
+
+                        <span>Category</span>
+
+                        <div class="header-icons">
+                            <p-sortIcon field="category.name"></p-sortIcon>
+                            <p-columnFilter field="category" matchMode="in" display="menu" [showMatchModes]="false"
+                                [showOperator]="false" [showAddButton]="false" class="ml-auto">
+                                <ng-template pTemplate="header">
+                                    <div class="picker-title">
+                                        <span>Category Picker</span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-multiSelect [ngModel]="value" [options]="categories" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
+
+                                        <ng-template let-option pTemplate="item">
+                                            <div class="inline-block vertical-align-middle">
+                                                <span class="ml-1 mt-1">{{ option.name }}</span>
+                                            </div>
+                                        </ng-template>
+
+                                    </p-multiSelect>
+                                </ng-template>
+                            </p-columnFilter>
+                        </div>
+                    </div>
+                </th>
+
+                <!-- Payment -->
+                <th pSortableColumn="paymentColumn" class="small-width">
+                    <div class="column-header">
+
+                        <span>Payment</span>
+
+                        <div class="header-icons">
+                            <p-sortIcon field="paymentColumn" />
+                            <p-columnFilter field="paymentColumn" matchMode="equals" display="menu" class="ml-auto">
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-dropdown 
+                                        [(ngModel)]="payMethod" 
+                                        [options]="paymentsOptions" 
+                                        (onChange)="filter($event.value)" 
+                                        placeholder="Any" 
+                                        class="filter-dropdown">
+
+                                        <ng-template let-option pTemplate="item">
+                                            <p-tag [value]="option" [severity]="getSeverity(option)" />
+                                        </ng-template>
+                                        
+                                    </p-dropdown>
+                                </ng-template>
+                            </p-columnFilter>
+                        </div>
+
+                    </div>
+                </th>
+
+                <!-- Card -->
+                <th pSortableColumn="card.name" class="medium-width">
+
+                    <div class="column-header">
+
+                        <span>Card</span>
+
+                        <div class="header-icons">
+                            <p-sortIcon field="card.name"></p-sortIcon>
+                            <p-columnFilter field="card" matchMode="in" display="menu" [showMatchModes]="false"
+                                [showOperator]="false" [showAddButton]="false" class="ml-auto">
+                                <ng-template pTemplate="header">
+                                    <div class="picker-title">
+                                        <span>Card Picker</span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-multiSelect [ngModel]="value" [options]="cards" placeholder="Any"
+                                        (onChange)="filter($event.value)" optionLabel="name">
+                                        <ng-template let-option pTemplate="item">
+                                            <div class="inline-block vertical-align-middle">
+
+                                                <!-- TODO Buscar algun recurso que siba para indentificar y diferenciar facilmente las tarjetas -->
+                                                <!-- <img [alt]="option.label" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" width="24" class="vertical-align-middle" /> -->
+
+                                                <span class="ml-1 mt-1">{{ option.name }}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                </ng-template>
+                            </p-columnFilter>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-bill>
+            <tr class="p-selectable-row">
+
+                <!-- Selected -->
+                <td>
+                    <div class="checkbox-container">
+                        <p-tableCheckbox [value]="bill" />
+                    </div>
+                </td>
+
+                <!-- Update -->
+                <td>
+                    <span class="p-column-title">Update</span>
+                    <div class="icon-container" (click)="editBill(bill.id)">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </div>
+                </td>
+
+                <!-- Concept -->
+                <td>
+                    <span class="p-column-title">Concept</span>
+                    {{ bill.concept }}
+                </td>
+
+                <!-- Amount -->
+                <td>
+                    <span class="p-column-title">Amount</span>
+                    {{ bill.amount | currency: 'MXN':'symbol' }}
+                </td>
+
+                <!-- Date -->
+                <td [title]="bill.created_at | date: 'hh:mm:ss aa'">
+                    <span class="p-column-title">Date</span>
+                    {{ bill.created_at | date: 'dd/MM/yyyy' }}
+                </td>
+
+                <!-- Institution -->
+                <td>
+                    <span class="p-column-title">Representative</span>
+                    <!-- <img [alt]="bill.representative.name"
+                    src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ bill.representative.image }}"
+                    width="32" style="vertical-align: middle" /> -->
+                    <span class="ml-1 vertical-align-middle">{{ bill.institution.name }}</span>
+                </td>
+
+                <!-- Category -->
+                <td>
+                    <span class="p-column-title">Category</span>
+                    <span class="ml-1 vertical-align-middle">{{ bill.category.name }}</span>
+                </td>
+
+
+                <!-- Payment -->
+                <td>
+                    <span class="p-column-title">Payment</span>
+                    <p-tag [value]="bill.paymentColumn" [severity]="getSeverity(bill.payment.id)"/>
+                </td>
+
+                <td>
+                    <span class="p-column-title">Card</span>
+                    <!-- <img [alt]="bill.representative.name"
+                    src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ bill.representative.image }}"
+                    width="32" style="vertical-align: middle" /> -->
+                    <span class="ml-1 vertical-align-middle">{{ bill.card.name }}</span>
+                </td>
+            </tr>
+        </ng-template>
+
+        <!-- Bills Not Found -->
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">No bills found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<p-dialog header="Show Metrics" [modal]="true" [(visible)]="visible" [style]="{ width: '30rem' }">
+
+    <ng-template pTemplate="header">
+        <span>
+            <i class="fa-solid fa-magnifying-glass-chart"></i> Metrics
+        </span>
+    </ng-template>
+
+    
+    <div class="metric-body">
+
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+            <div class="metric-label">
+                <span class="metric-name">Selected:</span>
+                <span class="metric-value">{{this.metrics.total}}</span>
+            </div>
+
+            <div class="metric-label">
+                <span class="metric-name">Sum:</span>
+                <span class="metric-value">{{this.metrics.sum.toFixed(2) | currency }}</span>
+            </div>
+
+            <div class="metric-label">
+                <span class="metric-name">Average:</span>
+                <span class="metric-value">{{this.metrics.average.toFixed(2) | currency }}</span>
+            </div>
+        </div>
+
+        
+
+        <div class="btn-metric-section">
+            
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-green" (click)="this.visible = false">OK</button>
+    </ng-template>
+</p-dialog>
+
+<p-toast />
