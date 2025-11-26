@@ -30,7 +30,7 @@ import { Task } from './productivity/task/entities/task.entity';
 import { CategoryTask } from './productivity/category-task/entities/category-task.entity';
 
 // API
-// import { GeneralModule } from './api/general/general.module';
+import { GmprojectModule } from './gmproject/gmproject.module';
 import { FinancesModule } from './finances/finances.module';
 import { ProductivityModule } from './productivity/productivity.module';
 
@@ -44,6 +44,7 @@ import { PayCreditCard } from './finances/pay-credit-card/entities/pay-credit-ca
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -55,6 +56,7 @@ import { PayCreditCard } from './finances/pay-credit-card/entities/pay-credit-ca
       name: process.env.DB_DATABASE_ONE,
       synchronize: true,
     }),
+
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -80,6 +82,7 @@ import { PayCreditCard } from './finances/pay-credit-card/entities/pay-credit-ca
       name: process.env.DB_DATABASE_TWO,
       synchronize: true,
     }),
+
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -92,8 +95,8 @@ import { PayCreditCard } from './finances/pay-credit-card/entities/pay-credit-ca
       synchronize: true,
     }),
     
-    NavItemModule,
-    // UserModule,
+    // GM Project
+    GmprojectModule,
 
     // Finances
     FinancesModule,

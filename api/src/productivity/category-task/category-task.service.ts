@@ -42,7 +42,7 @@ export class CategoryTaskService {
     return this.categoryTaskRepository.save(createCategoryTaskDto);
   }
 
-  public async findAll(): Promise<HttpResponse> {
+  public async findAll(): Promise<HttpResponse<any>> {
     const categories = await this.categoryTaskRepository.find();
     return new HttpResponse(true, 'All categories task finded', categories);
   }

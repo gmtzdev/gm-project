@@ -18,7 +18,7 @@ export class TaskService {
     private readonly categoryTaskService: CategoryTaskService,
   ) {}
 
-  public async create(createTaskDto: CreateTaskDto): Promise<HttpResponse> {
+  public async create(createTaskDto: CreateTaskDto): Promise<HttpResponse<Task>> {
     if (!createTaskDto.list) {
       createTaskDto.list = await this.listService.getDefaultList();
     }
@@ -28,10 +28,10 @@ export class TaskService {
       ];
     }
     const task = await this.taskRepository.save(createTaskDto);
-    return new HttpResponse(true, `Task created successfully`, task);
+    return new HttpResponse<Task>(true, `Task created successfully`, task);
   }
 
-  public async findAll(): Promise<HttpResponse> {
+  public async findAll(): Promise<HttpResponse<any>> {
     const tasks = await this.taskRepository.find({
       relations: { list: true, categories: true },
     });
@@ -50,7 +50,7 @@ export class TaskService {
   public async setReady(
     id: number,
     setReadyTaskDto: SetReadyTaskDto,
-  ): Promise<HttpResponse> {
+  ): Promise<HttpResponse<any>> {
     const result = await this.taskRepository.update(
       { id },
       { ready: setReadyTaskDto.ready },

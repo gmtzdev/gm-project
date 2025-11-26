@@ -71,7 +71,7 @@ export class FinancesService {
    * @param date
    * @returns
    */
-  async getIncomesPer(date: string): Promise<HttpResponse> {
+  async getIncomesPer(date: string): Promise<HttpResponse<any>> {
     try {
       const firstDayOfYear = moment(date)
         .startOf('year')
@@ -483,7 +483,7 @@ export class FinancesService {
    *
    * @returns {Promise<HttpResponse>}
    */
-  async getAmountSpendWithCreditCard(): Promise<HttpResponse> {
+  async getAmountSpendWithCreditCard(): Promise<HttpResponse<any>> {
     const currentPeriod = await this.payCreditCardService.getLastRegister();
     const limit = 7000;
 
@@ -511,7 +511,7 @@ export class FinancesService {
     );
   }
 
-  async getExpensesByWeek(dateFormatted: string): Promise<HttpResponse> {
+  async getExpensesByWeek(dateFormatted: string): Promise<HttpResponse<any>> {
     const year = dateFormatted.slice(0, 4);
     const month = dateFormatted.slice(4, 6);
     const day = dateFormatted.slice(6, 8);

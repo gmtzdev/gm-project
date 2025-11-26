@@ -65,7 +65,7 @@ export class PayCreditCardService {
    *
    * @returns {Promise<HttpResponse>}
    */
-  public async getDaysToPayCreditCard(): Promise<HttpResponse> {
+  public async getDaysToPayCreditCard(): Promise<HttpResponse<any>> {
     const currentDateToPay = await this.getLastRegister();
     const today = new Date();
     const timeDifference = currentDateToPay.payDate.getTime() - today.getTime();
@@ -80,9 +80,9 @@ export class PayCreditCardService {
   /**
    * Return number of days remaining to cut-off date
    * 
-   * @return {Promise<HttpResponse>}
+   * @return {Promise<HttpResponse<any>>}
    */
-  public async getDaysToCutOffCreditCard():Promise<HttpResponse>{
+  public async getDaysToCutOffCreditCard():Promise<HttpResponse<any>> {
     const currentDayToPay = await this.getLastRegister();
     const today = new Date();
     const formerCutOffDate = currentDayToPay.cutOffDate;
@@ -99,9 +99,9 @@ export class PayCreditCardService {
    * This reference is necesary to calculate the next amount to pay
    * and indicate the pay day
    * 
-   * @return { Promise<HttpResponse> }
+   * @return { Promise<HttpResponse<any>> }
    */
-  public async passToNextMonthCreditCard(): Promise<HttpResponse>{
+  public async passToNextMonthCreditCard(): Promise<HttpResponse<any>> {
     const currentDateToPay = await this.getLastRegister();
     const today = new Date();
     const nextCutOffDate = new Date(currentDateToPay.cutOffDate);

@@ -33,7 +33,7 @@ export class ListService {
     this.listRepository.save(createListDto);
   }
 
-  public async findAll(): Promise<HttpResponse> {
+  public async findAll(): Promise<HttpResponse<any>> {
     const lists = await this.listRepository.find();
     return new HttpResponse(true, 'All list finded', lists);
   }

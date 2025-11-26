@@ -14,7 +14,7 @@ export class SubscriptionController {
   @Post()
   @ApiOperation({ summary: 'Create a new subscription' })
   @ApiResponse({ status: 201, description: 'Subscription created successfully', type: Subscription })
-  async create(@Body() createSubscriptionDto: CreateSubscriptionDto): Promise<HttpResponse> {
+  async create(@Body() createSubscriptionDto: CreateSubscriptionDto): Promise<HttpResponse<any>> {
     const subscription = await this.subscriptionService.create(createSubscriptionDto);
     return new HttpResponse(true, 'Subscription created successfully', subscription);
   }
@@ -22,7 +22,7 @@ export class SubscriptionController {
   @Get()
   @ApiOperation({ summary: 'Get all subscriptions' })
   @ApiResponse({ status: 200, description: 'List of all subscriptions', type: [Subscription] })
-  async findAll(): Promise<HttpResponse> {
+  async findAll(): Promise<HttpResponse<any>> {
     const subscriptions = await this.subscriptionService.findAll();
     return new HttpResponse(true, 'The subscriptions were found', subscriptions);
   }

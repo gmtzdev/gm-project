@@ -3,10 +3,9 @@ import { HttpResponse } from './core/models/http/HttpResponse.model';
 
 @Injectable()
 export class AppService {
-  getUsers(): string[] {
-    return ['lalo', 'laura'];
+
+  getHello(): HttpResponse<any> {
+    return new HttpResponse<any>(true, 'Hello World!', {});
   }
-  getHello(): HttpResponse {
-    return new HttpResponse(true, 'Hello World!', {});
-  }
+
 }

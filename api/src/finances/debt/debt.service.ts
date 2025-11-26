@@ -145,7 +145,7 @@ export class DebtService {
     );
   }
 
-  public async test(debt: Debt): Promise<HttpResponse> {
+  public async test(debt: Debt): Promise<HttpResponse<any>> {
     const calculated = await this.calculatePercentage(debt.id);
     return new HttpResponse(true, 'Hello World', calculated);
   }

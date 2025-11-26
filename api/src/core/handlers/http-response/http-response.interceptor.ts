@@ -13,7 +13,7 @@ import { HttpResponse } from 'src/core/models/http/HttpResponse.model';
 export class HttpResponseInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
-      map((response: HttpResponse) => {
+      map((response: HttpResponse<any>) => {
         const res = context.switchToHttp().getResponse() as Response;
         res.status(response.status);
         return {
