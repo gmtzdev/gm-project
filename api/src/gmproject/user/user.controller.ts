@@ -18,7 +18,8 @@ export class UserController {
   @ApiResponse({ status: 409, description: 'Conflict - User already exists' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   async create(@Body() createUserDto: CreateUserDto): Promise<HttpResponse<User>> {
-    return await this.userService.create(createUserDto);
+    const newUserSaved = await this.userService.create(createUserDto);
+    return new HttpResponse<User>(true, 'User created successfully', newUserSaved, HttpStatus.CREATED);
   }
 
   @Get()

@@ -31,7 +31,7 @@ export class UserService {
    *   password: 'SecureP@ss123'
    * });
    */
-  async create(createUserDto: CreateUserDto): Promise<HttpResponse<User>> {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     // Validar si ya existe un usuario con el mismo username o email
     const existingUser = await this.userRepository.findOne({
       where: [
@@ -51,7 +51,7 @@ export class UserService {
 
     const newUser = this.userRepository.create(createUserDto);
     const newUserSaved = await this.userRepository.save(newUser);
-    return new HttpResponse<User>(true, 'User created successfully', newUserSaved);
+    return newUserSaved;
   }
 
   async findAll(): Promise<User[]> {
@@ -129,5 +129,18 @@ export class UserService {
       return false;
     }
     return true;
+  }
+
+
+  async findByEmail(email: string): Promise<User | null> { 
+    return this.userRepository.findOneBy({ email });
+  }
+
+  async findByEmailWithPassword(email: string): Promise<User | null> { 
+    return this.userRepository
+      .createQueryBuilder('user')
+      .addSelect('user.password')
+      .where('user.email = :email', { email })
+      .getOne();
   }
 }

@@ -12,12 +12,14 @@ import { NavItem } from 'src/gmproject/nav-item/entities/nav-item.entity';
 // Modules
 import { UserModule } from 'src/gmproject/user/user.module';
 import { NavItemModule } from 'src/gmproject/nav-item/nav-item.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User, NavItem], 'gmproject'),
     UserModule,
     NavItemModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
