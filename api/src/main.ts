@@ -3,9 +3,14 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { HttpResponseInterceptor } from './core/handlers/http-response/http-response.interceptor';
+import { useContainer } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  
+  // Permite que class-validator use el contenedor de dependencias de NestJS
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+  
   app.useGlobalInterceptors(new HttpResponseInterceptor());
 
   app.useGlobalPipes(

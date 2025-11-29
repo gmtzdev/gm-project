@@ -8,8 +8,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 // GM Project
 import { NavItem } from './gmproject/nav-item/entities/nav-item.entity';
 import { User } from './gmproject/user/entities/user.entity';
-
-import { NavItemModule } from './gmproject/nav-item/nav-item.module';
+import { Permission } from './gmproject/permission/entities/permission.entity';
+import { Role } from './gmproject/role/entities/role.entity';
 
 // Finances
 import { Bill } from './finances/bill/entities/bill.entity';
@@ -39,6 +39,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PayCreditCard } from './finances/pay-credit-card/entities/pay-credit-card.entity';
 
 
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -52,7 +53,7 @@ import { PayCreditCard } from './finances/pay-credit-card/entities/pay-credit-ca
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE_ONE,
-      entities: [User, NavItem],
+      entities: [User, NavItem, Permission, Role],
       name: process.env.DB_DATABASE_ONE,
       synchronize: true,
     }),
