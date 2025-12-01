@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    serever: 'http://localhost',
+    server: 'http://localhost',
     port: 1612
 }

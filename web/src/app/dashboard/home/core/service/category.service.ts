@@ -9,7 +9,7 @@ import { environment } from '../../../../../environment/environment';
   providedIn: 'root',
 })
 export class CategoryService {
-  private readonly URL = `${environment.serever}:${environment.port}/productivity/category-task`;
+  private readonly URL = `${environment.server}:${environment.port}/productivity/category-task`;
 
   constructor(public readonly http: HttpClient) {}
 

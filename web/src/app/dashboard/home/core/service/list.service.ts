@@ -9,7 +9,7 @@ import { environment } from '../../../../../environment/environment';
   providedIn: 'root',
 })
 export class ListService {
-  private readonly URL = `${environment.serever}:${environment.port}/productivity/list`;
+  private readonly URL = `${environment.server}:${environment.port}/productivity/list`;
   constructor(private http: HttpClient) {}
 
   public getAllList(): Observable<List[]> {

@@ -8,7 +8,7 @@ import { environment } from '../../../../environment/environment';
   providedIn: 'root',
 })
 export class GeneralService {
-  private URL: string = `${environment.serever}:${environment.port}`;
+  private URL: string = `${environment.server}:${environment.port}`;
 
   constructor(private http: HttpClient) {}
 

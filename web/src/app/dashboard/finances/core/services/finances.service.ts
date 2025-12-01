@@ -21,7 +21,7 @@ import { CreateSubscriptionDto } from '../dto/subscription/create-subscription.d
   providedIn: 'root',
 })
 export class FinancesService {
-  private URL: string = `${environment.serever}:${environment.port}/finances`;
+  private URL: string = `${environment.server}:${environment.port}/finances`;
 
   constructor(private http: HttpClient, private datesService: DatesService) {}
 

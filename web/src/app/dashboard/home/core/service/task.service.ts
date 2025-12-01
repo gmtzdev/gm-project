@@ -12,7 +12,7 @@ import { environment } from '../../../../../environment/environment';
   providedIn: 'root',
 })
 export class TaskService {
-  private readonly URL = `${environment.serever}:${environment.port}/productivity/task`;
+  private readonly URL = `${environment.server}:${environment.port}/productivity/task`;
 
   constructor(private readonly http: HttpClient) {}
 
