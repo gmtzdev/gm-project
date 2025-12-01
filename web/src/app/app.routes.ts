@@ -23,6 +23,11 @@ export const routes: Routes = [
     canActivate: [guestGuard]
   },
   {
+    path: 'sign-up',
+    loadComponent: () => import('./auth/sign-up/sign-up.component').then(m => m.SignUpComponent),
+    canActivate: [guestGuard]
+  },
+  {
     path: 'dashboard',
     component: MainComponent,
     canActivate: [authGuard],

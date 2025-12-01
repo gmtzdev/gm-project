@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { RegisterDto } from '../../core/dto/auth/register.dto';
+import { environment } from '../../../environment/environment';
+import { HttpClient } from '@angular/common/http';
+import { HttpResponse } from '../../shared/models/http/HttpResponse.model';
 
 export interface User {
   email: string;
   name: string;
+  loginName?: string;
 }
 
 @Injectable({
@@ -17,7 +22,12 @@ export class AuthService {
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   public currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(private router: Router) {}
+  private URL: string = `${environment.server}:${environment.port}/auth`;
+
+  constructor(
+    private readonly http: HttpClient,
+    private readonly router: Router
+  ) {}
 
   /**
    * Check if user has a valid authentication token
@@ -97,5 +107,36 @@ export class AuthService {
    */
   public getToken(): string | null {
     return localStorage.getItem('authToken');
+  }
+
+  /**
+   * Register a new user
+   */
+  public register(data: RegisterDto): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.http.post<HttpResponse>(`${this.URL}/register`, data).subscribe({
+        next: (response: HttpResponse) => {
+          // Handle successful registration
+          if(response.success === false) {
+            resolve(false);
+            return;
+          }
+
+          // Store authentication data
+          localStorage.setItem('authToken', response.data.token);
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          
+          // Update subjects
+          this.isAuthenticatedSubject.next(true);
+          this.currentUserSubject.next(response.data.user);
+
+          resolve(true);
+        },
+        error: (error) => {
+          // Handle registration error
+          resolve(false);
+        }
+      });
+    });
   }
 }
