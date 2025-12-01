@@ -4,6 +4,7 @@ import { LoginDto } from './dto/login.dto';
 import { HashingService } from './hashing/hashing.service';
 import { JwtService } from '@nestjs/jwt';
 import { RegisterDto } from './dto/register.dto';
+import { RegisterResult } from './interfaces/registerResult.interface';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,7 @@ export class AuthService {
         private readonly jwtService: JwtService,
     ) {}
 
-    public async register(registerDto: RegisterDto) {
+    public async register(registerDto: RegisterDto): Promise<RegisterResult> {
         const existingUser = await this.userService.findByEmail(registerDto.email);
         if (existingUser) {
             throw new UnauthorizedException('Email already in use');
@@ -26,7 +27,8 @@ export class AuthService {
         });
         const payload = { id: newUser.id, email: newUser.email};
         const token = await this.jwtService.signAsync(payload);
-        return { token };
+        const user = await this.userService.findById(newUser.id);
+        return { user,  token };
     }
 
     public async login(loginDto: LoginDto) { 
