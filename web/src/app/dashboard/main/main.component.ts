@@ -9,6 +9,8 @@ import { WidgetsComponent } from '../../global/widgets/widgets.component';
 import { GeneralService } from '../../shared/services/global/general.service';
 import { HttpResponse } from '../../shared/models/http/HttpResponse.model';
 import { AuthService } from '../../auth/services/auth.service';
+import { BreadcrumbComponent, BreadcrumbItem } from '../../components/breadcrumb/breadcrumb.component';
+import { UserAvatarComponent } from '../../components/user-avatar/user-avatar.component';
 
 @Component({
   selector: 'app-main',
@@ -19,6 +21,8 @@ import { AuthService } from '../../auth/services/auth.service';
 
     // Utils
     NavitemComponent,
+    BreadcrumbComponent,
+    UserAvatarComponent,
 
     // Global
     CalendarComponent,
@@ -31,6 +35,10 @@ import { AuthService } from '../../auth/services/auth.service';
 export class MainComponent implements OnInit {
   public collapse: boolean = false;
   public navitems: NavItem[] = [];
+  public breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Dashboard', icon: 'fa-solid fa-home', url: '/dashboard' },
+    { label: 'Main', icon: 'fa-solid fa-chart-line' }
+  ];
 
   constructor(private generalService: GeneralService, private router: Router, private authService: AuthService) {}
 

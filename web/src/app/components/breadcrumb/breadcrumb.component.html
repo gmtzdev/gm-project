@@ -1,0 +1,21 @@
+<nav class="breadcrumb" aria-label="breadcrumb">
+  <ol class="breadcrumb-list">
+    @for (item of items; track item.label; let i = $index) {
+      <li class="breadcrumb-item" [class.active]="isLast(i)">
+        @if (item.icon) {
+          <i [class]="item.icon"></i>
+        }
+        @if (item.url && !isLast(i)) {
+          <a [href]="item.url" (click)="navigateTo(item); $event.preventDefault()">
+            {{ item.label }}
+          </a>
+        } @else {
+          <span>{{ item.label }}</span>
+        }
+        @if (!isLast(i)) {
+          <i class="fa-solid fa-chevron-right separator"></i>
+        }
+      </li>
+    }
+  </ol>
+</nav>

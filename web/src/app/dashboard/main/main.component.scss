@@ -77,6 +77,26 @@
         padding-top: 20px;
         height: 100vh;
         overflow-y: auto;
+
+        .dash-header {
+            position: relative;
+            z-index: 55;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .dash-content {
+            position: relative;
+            z-index: 50;
+            padding: 0 20px;
+        }
     }
 
     .dash::-webkit-scrollbar {
@@ -196,6 +216,14 @@
             padding-top: 20px;
             height: 100vh;
             overflow-y: auto;
+
+            .dash-header {
+                margin: 0 0 20px 0;
+            }
+
+            .dash-content {
+                padding: 0;
+            }
         }
     
         .dash::-webkit-scrollbar {

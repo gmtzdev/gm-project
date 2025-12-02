@@ -33,7 +33,16 @@
 
     <!-- Dashboard -->
     <main class="dash" [ngClass]="{'dash-collapse' : !collapse}">
-        <router-outlet></router-outlet>
+        <!-- Header with Breadcrumb and User Avatar -->
+        <header class="dash-header">
+            <app-breadcrumb [items]="breadcrumbItems"></app-breadcrumb>
+            <app-user-avatar [size]="'medium'" [showName]="true"></app-user-avatar>
+        </header>
+
+        <!-- Main Content -->
+        <div class="dash-content">
+            <router-outlet></router-outlet>
+        </div>
     </main>
 
     <!-- Calendar -->

@@ -1,0 +1,54 @@
+<div class="user-avatar-container" [ngClass]="size">
+  <div class="avatar-wrapper" (click)="toggleDropdown()">
+    <div class="avatar">
+      <span class="initials">{{ initials }}</span>
+    </div>
+    @if (showName && user) {
+      <div class="user-info">
+        <span class="user-name">{{ user.name }}</span>
+        @if (user.email) {
+          <span class="user-email">{{ user.email }}</span>
+        }
+      </div>
+    }
+    <i class="fa-solid fa-chevron-down dropdown-icon" [class.open]="showDropdown"></i>
+  </div>
+
+  @if (showDropdown) {
+    <div class="dropdown-menu">
+      <div class="dropdown-header">
+        <div class="avatar small">
+          <span class="initials">{{ initials }}</span>
+        </div>
+        <div class="user-details">
+          <span class="name">{{ user?.name }}</span>
+          @if (user?.loginName) {
+            <span class="login-name">{{ user?.loginName }}</span>
+          }
+          <span class="email">{{ user?.email }}</span>
+        </div>
+      </div>
+      <div class="dropdown-divider"></div>
+      <ul class="dropdown-items">
+        <li>
+          <button class="dropdown-item" (click)="profile()">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item logout" (click)="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  }
+</div>
