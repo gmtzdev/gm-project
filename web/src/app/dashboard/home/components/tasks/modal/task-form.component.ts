@@ -362,77 +362,6 @@ export class TaskFormComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Handle form submission
-   */
-  onSubmit(): void {
-    if (this.taskForm.valid && !this.isLoading) {
-      this.isLoading = true;
-      
-      const formValue = this.taskForm.value;
-      
-      if (this.isEditMode && this.editingTask) {
-        // Update existing task
-        const updatedTask: Task = {
-          ...this.editingTask,
-          title: formValue.title,
-          note: formValue.note,
-          duedate: formValue.duedate || null,
-          assigned: formValue.assigned,
-          owner: formValue.owner,
-          list: this.availableLists.find(list => list.id === formValue.list) || this.editingTask.list,
-          // Schedule fields
-          startTime: formValue.startTime || undefined,
-          endTime: formValue.endTime || undefined,
-          // Repeat fields
-          repeatType: formValue.repeatType || undefined,
-          repeatInterval: formValue.repeatInterval || undefined,
-          repeatUntil: formValue.repeatUntil || undefined,
-          customDays: formValue.repeatType === 'custom' ? this.selectedDays : undefined
-        };
-
-        // TODO: Implement update task service call
-        this.taskModalService.handleFormSubmit(updatedTask);
-      } else {
-        // Create new task
-        const newTaskDto: CreateTaskDto = {
-          title: formValue.title,
-          note: formValue.note,
-          duedate: formValue.duedate || undefined,
-          assigned: formValue.assigned,
-          owner: formValue.owner,
-          list: formValue.list || undefined,
-          categories: [], // Default empty categories
-          // Schedule fields
-          startTime: formValue.startTime || undefined,
-          endTime: formValue.endTime || undefined,
-          // Repeat fields
-          repeatType: formValue.repeatType || undefined,
-          repeatInterval: formValue.repeatInterval || undefined,
-          repeatUntil: formValue.repeatUntil || undefined,
-          customDays: formValue.repeatType === 'custom' ? this.selectedDays : undefined
-        };
-
-        this.taskService.saveTask(newTaskDto)
-          .pipe(takeUntil(this.unsubscribe$))
-          .subscribe({
-            next: (createdTask) => {
-              this.taskModalService.handleFormSubmit(createdTask);
-              this.isLoading = false;
-            },
-            error: (error) => {
-              console.error('Error creating task:', error);
-              this.isLoading = false;
-              // TODO: Add proper error handling/notification
-            }
-          });
-      }
-    } else {
-      // Mark all fields as touched to show validation errors
-      this.markFormGroupTouched(this.taskForm);
-    }
-  }
-
-  /**
    * Close the modal
    */
   onClose(): void {
@@ -535,6 +464,81 @@ export class TaskFormComponent implements OnInit, OnDestroy {
         return 'weekend cycle(s)';
       default:
         return 'time(s)';
+    }
+  }
+
+
+
+  /**
+   * Handle form submission
+   */
+  onSubmit(): void {
+    if (this.taskForm.valid && !this.isLoading) {
+      this.isLoading = true;
+      
+      const formValue = this.taskForm.value;
+      
+      if (this.isEditMode && this.editingTask) {
+        // Update existing task
+        const updatedTask: Task = {
+          ...this.editingTask,
+          title: formValue.title,
+          note: formValue.note,
+          duedate: formValue.duedate || null,
+          assigned: formValue.assigned,
+          owner: formValue.owner,
+          list: this.availableLists.find(list => list.id === formValue.list) || this.editingTask.list,
+          // Schedule fields
+          startTime: formValue.startTime || undefined,
+          endTime: formValue.endTime || undefined,
+          // Repeat fields
+          repeatType: formValue.repeatType || undefined,
+          repeatInterval: formValue.repeatInterval || undefined,
+          repeatUntil: formValue.repeatUntil || undefined,
+          customDays: formValue.repeatType === 'custom' ? this.selectedDays : undefined
+        };
+
+        // TODO: Implement update task service call
+        this.taskModalService.handleFormSubmit(updatedTask);
+      } else {
+        // Create new task
+        const newTaskDto: CreateTaskDto = {
+          title: formValue.title,
+          note: formValue.note,
+          duedate: formValue.duedate || undefined,
+          assigned: formValue.assigned,
+          owner: formValue.owner,
+          list: formValue.list || undefined,
+          categories: [], // Default empty categories
+          // Schedule fields
+          startTime: formValue.startTime || undefined,
+          endTime: formValue.endTime || undefined,
+          // Repeat fields
+          repeatType: formValue.repeatType || undefined,
+          repeatInterval: formValue.repeatInterval || undefined,
+          repeatUntil: formValue.repeatUntil || undefined,
+          customDays: formValue.repeatType === 'custom' ? this.selectedDays : undefined
+        };
+
+        console.log('New Task DTO:', newTaskDto);
+
+        // this.taskService.saveTask(newTaskDto)
+        //   .pipe(takeUntil(this.unsubscribe$))
+        //   .subscribe({
+        //     next: (createdTask) => {
+        //       this.taskModalService.handleFormSubmit(createdTask);
+        //       this.isLoading = false;
+        //     },
+        //     error: (error) => {
+        //       console.error('Error creating task:', error);
+        //       this.isLoading = false;
+        //       // TODO: Add proper error handling/notification
+        //     }
+        //   });
+      }
+    } else {
+      // Mark all fields as touched to show validation errors
+      this.markFormGroupTouched(this.taskForm);
     }
   }
 }
