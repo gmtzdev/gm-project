@@ -5,6 +5,7 @@ import { HashingService } from './hashing/hashing.service';
 import { JwtService } from '@nestjs/jwt';
 import { RegisterDto } from './dto/register.dto';
 import { RegisterResult } from './interfaces/registerResult.interface';
+import { LoginResult } from './interfaces/loginResult.interface';
 
 @Injectable()
 export class AuthService {
@@ -31,14 +32,15 @@ export class AuthService {
         return { user,  token };
     }
 
-    public async login(loginDto: LoginDto) { 
-        const user = await this.userService.findByEmailWithPassword(loginDto.email);
-        if (!user) throw new UnauthorizedException('Invalid credentials');
-        const isPasswordValid = await this.hashingService.comparePassword(loginDto.password, user.password);
+    public async login(loginDto: LoginDto): Promise<LoginResult> { 
+        const userwp = await this.userService.findByEmailWithPassword(loginDto.email);
+        if (!userwp) throw new UnauthorizedException('Invalid credentials');
+        const isPasswordValid = await this.hashingService.comparePassword(loginDto.password, userwp.password);
         if(!isPasswordValid) throw new UnauthorizedException('Invalid credentials');
-        const payload = { userId: user.id, email: user.email };
+        const user = await this.userService.findById(userwp.id);
+        const payload = { id: user.id, email: user.email };
         const token = await this.jwtService.signAsync(payload);
-        return { token };
+        return { user, token };
     }
 
     public async getProfile(user: { id: string; email: string; roles: string[]; }) {
