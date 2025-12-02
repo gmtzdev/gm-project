@@ -38,6 +38,10 @@ export const routes: Routes = [
         children: [{ path: '', component: TodolistComponent }],
       },
       {
+        path: 'profile',
+        loadComponent: () => import('./dashboard/home/modules/profile/profile.component').then(m => m.ProfileComponent),
+      },
+      {
         path: 'finances',
         component: FinancesComponent,
         children: [

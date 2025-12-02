@@ -1,0 +1,443 @@
+<div class="profile-container">
+  <!-- Loading State -->
+  @if (loading()) {
+    <div class="loading-skeleton">
+      <p-card>
+        <p-skeleton width="100%" height="200px"></p-skeleton>
+      </p-card>
+    </div>
+  } @else {
+    <!-- Header Section -->
+    <div class="profile-header">
+      <p-card>
+        <div class="header-content">
+          <div class="user-info">
+            <div class="avatar-section">
+              <p-avatar 
+                [image]="userProfile()?.avatar || 'assets/png/default-avatar.png'" 
+                size="xlarge" 
+                shape="circle"
+                (click)="openAvatarDialog()"
+                class="avatar-clickable">
+              </p-avatar>
+              <div class="avatar-badge">
+                <i class="pi pi-camera"></i>
+              </div>
+            </div>
+            
+            <div class="user-details">
+              <div class="name-section">
+                <h2>{{ userProfile()?.firstName }} {{ userProfile()?.lastName }}</h2>
+                <p-tag 
+                  [value]="userProfile()?.role || 'Usuario'" 
+                  [severity]="userProfile()?.role === 'admin' ? 'danger' : 'info'">
+                </p-tag>
+              </div>
+              
+              <div class="contact-info">
+                <div class="info-item">
+                  <i class="pi pi-envelope"></i>
+                  <span>{{ userProfile()?.email }}</span>
+                </div>
+                @if (userProfile()?.phone) {
+                  <div class="info-item">
+                    <i class="pi pi-phone"></i>
+                    <span>{{ userProfile()?.phone }}</span>
+                  </div>
+                }
+                @if (userProfile()?.location) {
+                  <div class="info-item">
+                    <i class="pi pi-map-marker"></i>
+                    <span>{{ userProfile()?.location }}</span>
+                  </div>
+                }
+              </div>
+              
+              @if (userProfile()?.bio) {
+                <p class="bio">{{ userProfile()?.bio }}</p>
+              }
+              
+              <!-- Profile Completion -->
+              <div class="profile-completion">
+                <div class="completion-header">
+                  <span>Perfil Completado</span>
+                  <span class="percentage">{{ getCompletionPercentage() }}%</span>
+                </div>
+                <p-progressBar 
+                  [value]="getCompletionPercentage()" 
+                  [showValue]="false">
+                </p-progressBar>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Quick Actions -->
+          <div class="quick-actions">
+            @for (action of quickActions(); track action.label) {
+              <button 
+                pButton 
+                [icon]="action.icon" 
+                [label]="action.label"
+                [class]="'p-button-' + action.color"
+                (click)="action.action()"
+                pTooltip="{{ action.label }}">
+              </button>
+            }
+          </div>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats-section" id="user-stats">
+      <div class="stats-grid">
+        <!-- Total Activities -->
+        <p-card>
+          <div class="stat-card">
+            <div class="stat-icon primary">
+              <i class="pi pi-chart-line"></i>
+            </div>
+            <div class="stat-content">
+              <h3>{{ userStats()?.totalActivities || 0 }}</h3>
+              <p>Actividades Totales</p>
+            </div>
+          </div>
+        </p-card>
+
+        <!-- Tasks Completed -->
+        <p-card>
+          <div class="stat-card">
+            <div class="stat-icon success">
+              <i class="pi pi-check-circle"></i>
+            </div>
+            <div class="stat-content">
+              <h3>{{ userStats()?.tasksCompleted || 0 }}</h3>
+              <p>Tareas Completadas</p>
+            </div>
+          </div>
+        </p-card>
+
+        <!-- Payments Made -->
+        <p-card>
+          <div class="stat-card">
+            <div class="stat-icon warning">
+              <i class="pi pi-money-bill"></i>
+            </div>
+            <div class="stat-content">
+              <h3>{{ userStats()?.paymentsCompleted || 0 }}</h3>
+              <p>Pagos Realizados</p>
+            </div>
+          </div>
+        </p-card>
+
+        <!-- Goals Achieved -->
+        <p-card>
+          <div class="stat-card">
+            <div class="stat-icon info">
+              <i class="pi pi-trophy"></i>
+            </div>
+            <div class="stat-content">
+              <h3>{{ userStats()?.goalsAchieved || 0 }}</h3>
+              <p>Objetivos Alcanzados</p>
+            </div>
+          </div>
+        </p-card>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+      <div class="charts-grid">
+        <!-- Activity Distribution -->
+        <p-card header="Distribución de Actividades">
+          <div class="chart-container">
+            @if (activityChartData) {
+              <p-chart 
+                type="doughnut" 
+                [data]="activityChartData" 
+                [options]="activityChartOptions"
+                height="300px">
+              </p-chart>
+            }
+          </div>
+        </p-card>
+
+        <!-- Productivity Trend -->
+        <p-card header="Tendencia de Productividad (Últimos 7 Días)">
+          <div class="chart-container">
+            @if (productivityChartData) {
+              <p-chart 
+                type="line" 
+                [data]="productivityChartData" 
+                [options]="productivityChartOptions"
+                height="300px">
+              </p-chart>
+            }
+          </div>
+        </p-card>
+      </div>
+    </div>
+
+    <!-- Activity Timeline Section -->
+    <div class="activity-section">
+      <p-card header="Actividad Reciente">
+        @if (recentActivities().length > 0) {
+          <p-timeline 
+            [value]="recentActivities()" 
+            align="left"
+            styleClass="custom-timeline">
+            <ng-template pTemplate="content" let-activity>
+              <div class="timeline-item">
+                <div class="timeline-header">
+                  <div class="timeline-icon" [class]="getActivityColor(activity.type)">
+                    <i [class]="getActivityIcon(activity.type)"></i>
+                  </div>
+                  <div class="timeline-info">
+                    <h4>{{ activity.title }}</h4>
+                    <span class="timeline-date">{{ formatDate(activity.timestamp) }}</span>
+                  </div>
+                </div>
+                <p class="timeline-description">{{ activity.description }}</p>
+              </div>
+            </ng-template>
+          </p-timeline>
+        } @else {
+          <div class="empty-state">
+            <i class="pi pi-inbox"></i>
+            <p>No hay actividades recientes</p>
+          </div>
+        }
+      </p-card>
+    </div>
+
+    <!-- Account Information -->
+    <div class="account-info-section">
+      <p-card header="Información de la Cuenta">
+        <p-tabView>
+          <p-tabPanel header="Detalles">
+            <div class="account-details">
+              <div class="detail-row">
+                <span class="label">Usuario desde:</span>
+                <!-- <span class="value">{{ formatDate(userProfile()?.createdAt || new Date()) }}</span> -->
+              </div>
+              <div class="detail-row">
+                <span class="label">Último acceso:</span>
+                <!-- <span class="value">{{ formatDate(userProfile()?.lastLogin || new Date()) }}</span> -->
+              </div>
+              <div class="detail-row">
+                <span class="label">Estado de cuenta:</span>
+                <p-tag 
+                  [value]="userProfile()?.isActive ? 'Activa' : 'Inactiva'" 
+                  [severity]="userProfile()?.isActive ? 'success' : 'danger'">
+                </p-tag>
+              </div>
+              <div class="detail-row">
+                <span class="label">Verificación de email:</span>
+                <p-tag 
+                  [value]="userProfile()?.emailVerified ? 'Verificado' : 'No verificado'" 
+                  [severity]="userProfile()?.emailVerified ? 'success' : 'warning'">
+                </p-tag>
+              </div>
+            </div>
+          </p-tabPanel>
+          
+          <p-tabPanel header="Preferencias">
+            <div class="preferences">
+              <div class="preference-row">
+                <span class="label">Idioma:</span>
+                <span class="value">{{ userProfile()?.preferences?.language || 'Español' }}</span>
+              </div>
+              <div class="preference-row">
+                <span class="label">Zona horaria:</span>
+                <span class="value">{{ userProfile()?.preferences?.timezone || 'America/Mexico_City' }}</span>
+              </div>
+              <div class="preference-row">
+                <span class="label">Tema:</span>
+                <span class="value">{{ userProfile()?.preferences?.theme || 'Light' }}</span>
+              </div>
+              <div class="preference-row">
+                <span class="label">Notificaciones:</span>
+                <p-tag 
+                  [value]="userProfile()?.preferences?.notifications ? 'Activadas' : 'Desactivadas'" 
+                  [severity]="userProfile()?.preferences?.notifications ? 'success' : 'secondary'">
+                </p-tag>
+              </div>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </p-card>
+    </div>
+  }
+</div>
+
+<!-- Edit Profile Dialog -->
+<p-dialog 
+  header="Editar Perfil" 
+  [(visible)]="showEditDialog" 
+  [modal]="true" 
+  [style]="{width: '600px'}"
+  [draggable]="false"
+  [resizable]="false">
+  <div class="edit-form">
+    <div class="form-row">
+      <div class="form-field">
+        <label for="firstName">Nombre</label>
+        <input 
+          id="firstName"
+          type="text" 
+          pInputText 
+          [(ngModel)]="editedProfile.firstName"
+          placeholder="Nombre">
+      </div>
+      <div class="form-field">
+        <label for="lastName">Apellido</label>
+        <input 
+          id="lastName"
+          type="text" 
+          pInputText 
+          [(ngModel)]="editedProfile.lastName"
+          placeholder="Apellido">
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input 
+        id="email"
+        type="email" 
+        pInputText 
+        [(ngModel)]="editedProfile.email"
+        placeholder="email@ejemplo.com">
+    </div>
+    
+    <div class="form-field">
+      <label for="phone">Teléfono</label>
+      <input 
+        id="phone"
+        type="tel" 
+        pInputText 
+        [(ngModel)]="editedProfile.phone"
+        placeholder="+52 123 456 7890">
+    </div>
+    
+    <div class="form-field">
+      <label for="location">Ubicación</label>
+      <input 
+        id="location"
+        type="text" 
+        pInputText 
+        [(ngModel)]="editedProfile.location"
+        placeholder="Ciudad, País">
+    </div>
+    
+    <div class="form-field">
+      <label for="bio">Biografía</label>
+      <textarea 
+        id="bio"
+        pInputTextarea 
+        [(ngModel)]="editedProfile.bio"
+        placeholder="Cuéntanos sobre ti..."
+        [rows]="4">
+      </textarea>
+    </div>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <button 
+      pButton 
+      label="Cancelar" 
+      icon="pi pi-times" 
+      class="p-button-text"
+      (click)="showEditDialog.set(false)">
+    </button>
+    <button 
+      pButton 
+      label="Guardar" 
+      icon="pi pi-check" 
+      (click)="saveProfile()">
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!-- Change Password Dialog -->
+<p-dialog 
+  header="Cambiar Contraseña" 
+  [(visible)]="showPasswordDialog" 
+  [modal]="true" 
+  [style]="{width: '500px'}"
+  [draggable]="false"
+  [resizable]="false">
+  <div class="password-form">
+    <div class="form-field">
+      <label for="oldPassword">Contraseña Actual</label>
+      <input 
+        id="oldPassword"
+        type="password" 
+        pInputText 
+        placeholder="Contraseña actual">
+    </div>
+    
+    <div class="form-field">
+      <label for="newPassword">Nueva Contraseña</label>
+      <input 
+        id="newPassword"
+        type="password" 
+        pInputText 
+        placeholder="Nueva contraseña">
+    </div>
+    
+    <div class="form-field">
+      <label for="confirmPassword">Confirmar Contraseña</label>
+      <input 
+        id="confirmPassword"
+        type="password" 
+        pInputText 
+        placeholder="Confirmar nueva contraseña">
+    </div>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <button 
+      pButton 
+      label="Cancelar" 
+      icon="pi pi-times" 
+      class="p-button-text"
+      (click)="showPasswordDialog.set(false)">
+    </button>
+    <button 
+      pButton 
+      label="Cambiar" 
+      icon="pi pi-check">
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!-- Upload Avatar Dialog -->
+<p-dialog 
+  header="Cambiar Foto de Perfil" 
+  [(visible)]="showAvatarDialog" 
+  [modal]="true" 
+  [style]="{width: '500px'}"
+  [draggable]="false"
+  [resizable]="false">
+  <div class="avatar-upload">
+    <p-fileUpload 
+      mode="basic" 
+      accept="image/*" 
+      [maxFileSize]="5000000"
+      chooseLabel="Seleccionar Imagen"
+      (onSelect)="uploadAvatar($event)">
+    </p-fileUpload>
+    <p class="upload-hint">Tamaño máximo: 5MB. Formatos: JPG, PNG, GIF</p>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <button 
+      pButton 
+      label="Cerrar" 
+      icon="pi pi-times" 
+      class="p-button-text"
+      (click)="showAvatarDialog.set(false)">
+    </button>
+  </ng-template>
+</p-dialog>
