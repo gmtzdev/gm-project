@@ -31,34 +31,6 @@ export class LoginComponent {
     this.showPassword = !this.showPassword;
   }
 
-  public async onSubmit(): Promise<void> {
-    if (this.loginForm.valid) {
-      this.isLoading = true;
-      
-      const { email, password } = this.loginForm.value;
-      
-      try {
-        const success = await this.authService.login(email, password);
-        
-        if (success) {
-          // Navigate to dashboard
-          this.router.navigate(['/dashboard']);
-        } else {
-          // Handle login failure
-          console.error('Login failed');
-          // You can add error handling here (show toast, etc.)
-        }
-      } catch (error) {
-        console.error('Login error:', error);
-        // Handle error
-      } finally {
-        this.isLoading = false;
-      }
-    } else {
-      this.markFormGroupTouched();
-    }
-  }
-
   private markFormGroupTouched(): void {
     Object.keys(this.loginForm.controls).forEach(key => {
       const control = this.loginForm.get(key);
@@ -85,5 +57,33 @@ export class LoginComponent {
   public isFieldInvalid(fieldName: string): boolean {
     const control = this.loginForm.get(fieldName);
     return !!(control?.errors && control.touched);
+  }
+
+  public async onSubmit(): Promise<void> {
+    if (this.loginForm.valid) {
+      this.isLoading = true;
+      
+      const { email, password } = this.loginForm.value;
+      
+      try {
+        const success = await this.authService.login(email, password);
+        
+        if (success) {
+          // Navigate to dashboard
+          this.router.navigate(['/dashboard']);
+        } else {
+          // Handle login failure
+          console.error('Login failed');
+          // You can add error handling here (show toast, etc.)
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        // Handle error
+      } finally {
+        this.isLoading = false;
+      }
+    } else {
+      this.markFormGroupTouched();
+    }
   }
 }

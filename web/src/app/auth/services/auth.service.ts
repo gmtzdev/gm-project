@@ -49,26 +49,28 @@ export class AuthService {
    */
   public login(email: string, password: string): Promise<boolean> {
     return new Promise((resolve) => {
-      // Simulate API call
-      setTimeout(() => {
-        // For demo purposes, accept any valid input
-        if (email && password.length >= 6) {
-          const user: User = { email, name: 'User' };
-          const token = 'demo-token-' + Date.now();
+      this.http.post<HttpResponse>(`${this.URL}/login`, { email, password }).subscribe({
+        next: (response: HttpResponse) => {
+          // Handle successful login
+          if(response.success === false) {
+            resolve(false);
+            return;
+          }
           
           // Store authentication data
-          localStorage.setItem('authToken', token);
-          localStorage.setItem('user', JSON.stringify(user));
-          
+          localStorage.setItem('authToken', response.data.token);
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+
           // Update subjects
           this.isAuthenticatedSubject.next(true);
-          this.currentUserSubject.next(user);
-          
+          this.currentUserSubject.next(response.data.user);
           resolve(true);
-        } else {
+        },
+        error: (error) => {
+          // Handle login error
           resolve(false);
         }
-      }, 1500);
+      });
     });
   }
 
