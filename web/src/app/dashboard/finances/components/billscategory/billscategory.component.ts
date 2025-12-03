@@ -8,11 +8,10 @@ import { MoneyFormatPipe } from '../../../../shared/pipes/MoneyFormat.pipe';
 import { TimeAgoPipe } from '../../../../shared/pipes/TimeAgo.pipe';
 
 @Component({
-  selector: 'app-billscategory',
-  standalone: true,
-  imports: [CommonModule, MoneyFormatPipe, TimeAgoPipe],
-  templateUrl: './billscategory.component.html',
-  styleUrl: './billscategory.component.scss',
+    selector: 'app-billscategory',
+    imports: [CommonModule, MoneyFormatPipe, TimeAgoPipe],
+    templateUrl: './billscategory.component.html',
+    styleUrl: './billscategory.component.scss'
 })
 export class BillscategoryComponent implements OnInit {
   public dom!: HTMLDivElement;

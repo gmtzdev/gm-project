@@ -4,11 +4,10 @@ import { AddContributionModalService } from '../../../../shared/services/modals/
 import * as echarts from 'echarts';
 
 @Component({
-  selector: 'app-debt-graph',
-  standalone: true,
-  imports: [],
-  templateUrl: './debt-graph.component.html',
-  styleUrl: './debt-graph.component.scss',
+    selector: 'app-debt-graph',
+    imports: [],
+    templateUrl: './debt-graph.component.html',
+    styleUrl: './debt-graph.component.scss'
 })
 export class DebtGraphComponent {
   @Input() id: number = 0;

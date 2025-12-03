@@ -15,7 +15,7 @@ import { TagModule } from 'primeng/tag';
 import { TimelineModule } from 'primeng/timeline';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+// import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TooltipModule } from 'primeng/tooltip';
@@ -23,30 +23,29 @@ import { TabViewModule } from 'primeng/tabview';
 import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
-  selector: 'app-profile',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    CardModule,
-    ButtonModule,
-    AvatarModule,
-    BadgeModule,
-    ChartModule,
-    TableModule,
-    TagModule,
-    TimelineModule,
-    DialogModule,
-    InputTextModule,
-    InputTextareaModule,
-    FileUploadModule,
-    ProgressBarModule,
-    TooltipModule,
-    TabViewModule,
-    SkeletonModule
-  ],
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+    selector: 'app-profile',
+    imports: [
+        CommonModule,
+        FormsModule,
+        CardModule,
+        ButtonModule,
+        AvatarModule,
+        BadgeModule,
+        ChartModule,
+        TableModule,
+        TagModule,
+        TimelineModule,
+        DialogModule,
+        InputTextModule,
+        // InputTextareaModule,
+        FileUploadModule,
+        ProgressBarModule,
+        TooltipModule,
+        TabViewModule,
+        SkeletonModule
+    ],
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
   userProfile = signal<UserProfile | null>(null);

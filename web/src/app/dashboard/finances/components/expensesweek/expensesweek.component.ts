@@ -18,11 +18,10 @@ type EChartsOption = echarts.ComposeOption<
   GridComponentOption | BarSeriesOption
 >;
 @Component({
-  selector: 'app-expensesweek',
-  standalone: true,
-  imports: [],
-  templateUrl: './expensesweek.component.html',
-  styleUrl: './expensesweek.component.scss',
+    selector: 'app-expensesweek',
+    imports: [],
+    templateUrl: './expensesweek.component.html',
+    styleUrl: './expensesweek.component.scss'
 })
 export class ExpensesweekComponent implements OnInit {
   @ViewChild('mainExpensesWeek')

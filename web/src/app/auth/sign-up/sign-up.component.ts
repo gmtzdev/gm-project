@@ -6,11 +6,10 @@ import { AuthService } from '../services/auth.service';
 import { RegisterDto } from '../../core/dto/auth/register.dto';
 
 @Component({
-  selector: 'app-sign-up',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.scss'
+    selector: 'app-sign-up',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './sign-up.component.html',
+    styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent {
   public signUpForm: FormGroup;

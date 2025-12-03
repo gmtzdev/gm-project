@@ -10,11 +10,10 @@ import { FinancesService } from '../../../core/services/finances.service';
 
 
 @Component({
-  selector: 'app-subscription-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './subscription-form.component.html',
-  styleUrl: './subscription-form.component.scss'
+    selector: 'app-subscription-form',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './subscription-form.component.html',
+    styleUrl: './subscription-form.component.scss'
 })
 export class SubscriptionFormComponent implements OnInit, OnDestroy {
   @Input() isVisible = false;

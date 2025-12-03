@@ -13,19 +13,17 @@ import { Category } from '../../core/models/database/Category.model';
 import { Payment } from '../../core/models/database/Payment.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Card } from '../../core/models/database/Card.model';
-import { BankCardComponent } from '../../../../components/utils/bank-card/bank-card.component';
 import { SuccessModal } from '../../../../shared/classes/modals/SuccessModal';
 import { ErrorModal } from '../../../../shared/classes/modals/ErrorModal';
 import { HttpResponse } from '../../../../shared/models/http/HttpResponse.model';
 import { Debt } from '../../core/models/database/Debt.model';
 
 @Component({
-  selector: 'app-addbill',
-  standalone: true,
-  imports: [ReactiveFormsModule, AutocompleteLibModule, BankCardComponent],
-  templateUrl: './addbill.component.html',
-  styleUrl: './addbill.component.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    selector: 'app-addbill',
+    imports: [ReactiveFormsModule, AutocompleteLibModule],
+    templateUrl: './addbill.component.html',
+    styleUrl: './addbill.component.scss',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AddbillComponent implements OnInit {
   public categories: Category[] = [];

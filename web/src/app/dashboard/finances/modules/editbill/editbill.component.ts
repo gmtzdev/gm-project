@@ -7,7 +7,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
-import { BankCardComponent } from '../../../../components/utils/bank-card/bank-card.component';
 import { FinancesService } from '../../core/services/finances.service';
 import { Category } from '../../core/models/database/Category.model';
 import { Payment } from '../../core/models/database/Payment.model';
@@ -21,13 +20,12 @@ import { SuccessModal } from '../../../../shared/classes/modals/SuccessModal';
 import { HttpResponse } from '../../../../shared/models/http/HttpResponse.model';
 
 @Component({
-  selector: 'app-editbill',
-  standalone: true,
-  imports: [ReactiveFormsModule, AutocompleteLibModule, BankCardComponent],
-  providers: [DatePipe],
-  templateUrl: './editbill.component.html',
-  styleUrl: './editbill.component.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    selector: 'app-editbill',
+    imports: [ReactiveFormsModule, AutocompleteLibModule],
+    providers: [DatePipe],
+    templateUrl: './editbill.component.html',
+    styleUrl: './editbill.component.scss',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class EditbillComponent {
   private formBuilder: FormBuilder = new FormBuilder();

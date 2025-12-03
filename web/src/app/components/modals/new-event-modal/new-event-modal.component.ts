@@ -11,11 +11,10 @@ import {
 import { DateModalService } from '../../../shared/services/modals/date-modal.service';
 
 @Component({
-  selector: 'app-new-event-modal',
-  standalone: true,
-  imports: [InputSwitchModule, CheckboxModule, ReactiveFormsModule],
-  templateUrl: './new-event-modal.component.html',
-  styleUrl: './new-event-modal.component.scss',
+    selector: 'app-new-event-modal',
+    imports: [InputSwitchModule, CheckboxModule, ReactiveFormsModule],
+    templateUrl: './new-event-modal.component.html',
+    styleUrl: './new-event-modal.component.scss'
 })
 export class NewEventModalComponent implements OnInit {
   @ViewChild('ModalDateWrap', { static: true }) ModalDateWrap: ElementRef | any;

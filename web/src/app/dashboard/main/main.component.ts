@@ -13,24 +13,21 @@ import { BreadcrumbComponent, BreadcrumbItem } from '../../components/breadcrumb
 import { UserAvatarComponent } from '../../components/user-avatar/user-avatar.component';
 
 @Component({
-  selector: 'app-main',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-
-    // Utils
-    NavitemComponent,
-    BreadcrumbComponent,
-    UserAvatarComponent,
-
-    // Global
-    CalendarComponent,
-    TasksComponent,
-    WidgetsComponent,
-  ],
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.scss',
+    selector: 'app-main',
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        // Utils
+        NavitemComponent,
+        BreadcrumbComponent,
+        UserAvatarComponent,
+        // Global
+        CalendarComponent,
+        TasksComponent,
+        WidgetsComponent,
+    ],
+    templateUrl: './main.component.html',
+    styleUrl: './main.component.scss'
 })
 export class MainComponent implements OnInit {
   public collapse: boolean = false;

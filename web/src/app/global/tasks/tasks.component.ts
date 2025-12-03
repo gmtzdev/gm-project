@@ -3,11 +3,10 @@ import { TaskService } from '../../shared/services/global/task.service';
 import { TaskModalService } from '../../dashboard/home/services/task-modal.service';
 
 @Component({
-  selector: 'app-tasks',
-  standalone: true,
-  imports: [],
-  templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.scss'
+    selector: 'app-tasks',
+    imports: [],
+    templateUrl: './tasks.component.html',
+    styleUrl: './tasks.component.scss'
 })
 export class TasksComponent implements OnInit {
   public day: string = '';

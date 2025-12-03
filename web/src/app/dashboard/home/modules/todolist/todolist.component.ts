@@ -22,19 +22,18 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-todolist',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CheckboxModule,
-    OverlayPanelModule,
-    CommonModule,
-    ToastModule
-  ],
-  providers: [MessageService],
-  templateUrl: './todolist.component.html',
-  styleUrl: './todolist.component.scss',
+    selector: 'app-todolist',
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CheckboxModule,
+        OverlayPanelModule,
+        CommonModule,
+        ToastModule
+    ],
+    providers: [MessageService],
+    templateUrl: './todolist.component.html',
+    styleUrl: './todolist.component.scss'
 })
 export class TodolistComponent implements OnInit {
   private selectedList!: List;

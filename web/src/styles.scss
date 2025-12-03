@@ -1,11 +1,11 @@
 @use "./styles/global/button.scss";
 
-/* You can add global styles to this file, and also import other style files */
-@import "primeicons/primeicons.css";
-@import "./app/core/styles/primeng/toast.scss";
-@import "./app/core/styles/primeng/checkbox.scss";
-@import "./app/core/styles/primeng/overlaypanel.scss";
-@import "./app/core/styles/primeng/dialog.scss";
+/* You can add global styles to this file, and also use other style files */
+@use "primeicons/primeicons.css";
+@use "./app/core/styles/primeng/toast.scss";
+@use "./app/core/styles/primeng/checkbox.scss";
+@use "./app/core/styles/primeng/overlaypanel.scss";
+@use "./app/core/styles/primeng/dialog.scss";
 
 // linear-gradient(180deg, #2E323f 0%, #0A061A 100%);
 @font-face {

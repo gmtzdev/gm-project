@@ -14,11 +14,10 @@ import { FinancesService } from '../../core/services/finances.service';
 import { HttpResponse } from '../../../../shared/models/http/HttpResponse.model';
 
 @Component({
-  selector: 'app-addcontribution-modal',
-  standalone: true,
-  imports: [InputSwitchModule, CheckboxModule, ReactiveFormsModule],
-  templateUrl: './addcontribution-modal.component.html',
-  styleUrl: './addcontribution-modal.component.scss',
+    selector: 'app-addcontribution-modal',
+    imports: [InputSwitchModule, CheckboxModule, ReactiveFormsModule],
+    templateUrl: './addcontribution-modal.component.html',
+    styleUrl: './addcontribution-modal.component.scss'
 })
 export class AddcontributionModalComponent {
   @ViewChild('ModalNewContrinution', { static: true }) ModalNewContrinution:

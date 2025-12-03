@@ -10,10 +10,9 @@ import { List } from '../../../core/models/database/List.model';
 import { CreateTaskDto } from '../../../core/dto/create-task.dto';
 
 @Component({
-  selector: 'app-task-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    selector: 'app-task-form',
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
     <div class="modal-overlay" *ngIf="isVisible" (click)="onClose()">
       <div class="modal-content" (click)="$event.stopPropagation()">
         <div class="modal-header">
@@ -193,7 +192,7 @@ import { CreateTaskDto } from '../../../core/dto/create-task.dto';
       </div>
     </div>
   `,
-  styleUrl: './task-form.component.scss'
+    styleUrl: './task-form.component.scss'
 })
 export class TaskFormComponent implements OnInit, OnDestroy {
 

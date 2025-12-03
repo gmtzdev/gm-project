@@ -8,16 +8,14 @@ import { SubscriptionFormComponent } from './dashboard/finances/components/subsc
 import { TaskFormComponent } from './dashboard/home/components/tasks/modal/task-form.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, CommonModule, NewEventModalComponent, AddcontributionModalComponent, SpinnerComponent,
-
-    // Modals
-    SubscriptionFormComponent,
-    TaskFormComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [RouterOutlet, CommonModule, NewEventModalComponent, AddcontributionModalComponent, SpinnerComponent,
+        // Modals
+        SubscriptionFormComponent,
+        TaskFormComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   title = 'gm-project';
