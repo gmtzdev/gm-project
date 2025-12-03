@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -7,7 +7,7 @@ import { RegisterDto } from '../../core/dto/auth/register.dto';
 
 @Component({
     selector: 'app-sign-up',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss'
 })

@@ -15,23 +15,20 @@ import { FormsModule } from '@angular/forms';
 import { DatesService } from '../../../../shared/services/global/dates.service';
 import { SubscriptionsComponent } from '../../components/subscriptions/subscriptions.component';
 import { SubscriptionModalService } from '../../components/subscriptions/modal/service/subscription-modal.service';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
     selector: 'app-homefinances',
     imports: [
-        CardComponent,
-        IncomesyearComponent,
-        ExpensesweekComponent,
-        ObjetivesComponent,
-        BillscategoryComponent,
-        DebtsComponent,
-        SubscriptionsComponent,
-        FormsModule,
-        // NgxChartsModule,
-        // Modals
-        CommonModule
-    ],
+    CardComponent,
+    IncomesyearComponent,
+    ExpensesweekComponent,
+    ObjetivesComponent,
+    BillscategoryComponent,
+    DebtsComponent,
+    SubscriptionsComponent,
+    FormsModule
+],
     templateUrl: './homefinances.component.html',
     styleUrl: './homefinances.component.scss',
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

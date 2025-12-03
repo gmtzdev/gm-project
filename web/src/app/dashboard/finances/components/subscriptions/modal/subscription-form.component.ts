@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription as RxSubscription } from 'rxjs';
 import { Subscription } from '../../../core/models/database/Susbcription.model';
@@ -11,7 +11,7 @@ import { FinancesService } from '../../../core/services/finances.service';
 
 @Component({
     selector: 'app-subscription-form',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './subscription-form.component.html',
     styleUrl: './subscription-form.component.scss'
 })

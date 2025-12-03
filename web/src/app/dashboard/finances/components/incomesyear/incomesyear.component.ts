@@ -3,14 +3,11 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, OnInit, ViewChild } from
 import { FinancesService } from '../../core/services/finances.service';
 import { HttpResponse } from '../../../../shared/models/http/HttpResponse.model';
 import { IncomesVsBill } from '../../core/models/IncomesVsBill.model';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
     selector: 'app-incomesyear',
-    imports: [
-      // NgxChartsModule, 
-      CommonModule
-    ],
+    imports: [],
     templateUrl: './incomesyear.component.html',
     styleUrl: './incomesyear.component.scss',
     animations: []

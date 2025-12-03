@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { ProfileService } from './profile.service';
 import { UserProfile, UserStats, UserActivity, QuickAction } from './profile.interface';
@@ -19,31 +19,29 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TooltipModule } from 'primeng/tooltip';
-import { TabViewModule } from 'primeng/tabview';
+// import { TabViewModule } from 'primeng/tabview';
 import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
     selector: 'app-profile',
     imports: [
-        CommonModule,
-        FormsModule,
-        CardModule,
-        ButtonModule,
-        AvatarModule,
-        BadgeModule,
-        ChartModule,
-        TableModule,
-        TagModule,
-        TimelineModule,
-        DialogModule,
-        InputTextModule,
-        // InputTextareaModule,
-        FileUploadModule,
-        ProgressBarModule,
-        TooltipModule,
-        TabViewModule,
-        SkeletonModule
-    ],
+    FormsModule,
+    CardModule,
+    ButtonModule,
+    AvatarModule,
+    BadgeModule,
+    ChartModule,
+    TableModule,
+    TagModule,
+    TimelineModule,
+    DialogModule,
+    InputTextModule,
+    FileUploadModule,
+    ProgressBarModule,
+    TooltipModule,
+    // TabViewModule,
+    SkeletonModule
+],
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.scss']
 })

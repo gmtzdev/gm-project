@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -11,187 +11,186 @@ import { CreateTaskDto } from '../../../core/dto/create-task.dto';
 
 @Component({
     selector: 'app-task-form',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     template: `
-    <div class="modal-overlay" *ngIf="isVisible" (click)="onClose()">
-      <div class="modal-content" (click)="$event.stopPropagation()">
-        <div class="modal-header">
-          <h3>{{ isEditMode ? 'Edit Task' : 'Create New Task' }}</h3>
-          <button type="button" class="close-btn" (click)="onClose()">×</button>
-        </div>
-        
-        <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form">
-          <div class="form-group">
-            <label for="title">Task Title *</label>
-            <input
-              id="title"
-              type="text"
-              formControlName="title"
-              [class.invalid]="isFieldInvalid('title')"
-              placeholder="Enter task title"
-            />
-            <div class="error-message" *ngIf="isFieldInvalid('title')">
-              {{ getFieldErrorMessage('title') }}
-            </div>
+    @if (isVisible) {
+      <div class="modal-overlay" (click)="onClose()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>{{ isEditMode ? 'Edit Task' : 'Create New Task' }}</h3>
+            <button type="button" class="close-btn" (click)="onClose()">×</button>
           </div>
-
-          <div class="form-group">
-            <label for="note">Note</label>
-            <textarea
-              id="note"
-              formControlName="note"
-              rows="3"
-              placeholder="Enter task description"
-            ></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="duedate">Due Date</label>
-            <input
-              id="duedate"
-              type="datetime-local"
-              formControlName="duedate"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="assigned">Assigned To</label>
-            <input
-              id="assigned"
-              type="text"
-              formControlName="assigned"
-              placeholder="Enter assignee"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="owner">Owner</label>
-            <input
-              id="owner"
-              type="text"
-              formControlName="owner"
-              placeholder="Enter owner"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="list">List</label>
-            <select id="list" formControlName="list">
-              <option value="">Select a list</option>
-              <option *ngFor="let list of availableLists" [value]="list.id">
-                {{ list.name }}
-              </option>
-            </select>
-          </div>
-
-          <!-- Schedule Section -->
-          <div class="form-section">
-            <h4 class="section-title">Schedule</h4>
-            
-            <div class="form-row">
-              <div class="form-group">
-                <label for="startTime">Start Time</label>
-                <input
-                  id="startTime"
-                  type="time"
-                  formControlName="startTime"
-                  placeholder="10:00"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="endTime">End Time</label>
-                <input
-                  id="endTime"
-                  type="time"
-                  formControlName="endTime"
-                  placeholder="15:00"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Repeat Section -->
-          <div class="form-section">
-            <h4 class="section-title">Repeat Options</h4>
-            
+          <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form">
             <div class="form-group">
-              <label for="repeatType">Repeat</label>
-              <select id="repeatType" formControlName="repeatType">
-                <option value="">No repeat</option>
-                <option value="daily">Daily</option>
-                <option value="weekly">Weekly</option>
-                <option value="monthly">Monthly</option>
-                <option value="yearly">Yearly</option>
-                <option value="workdays">Workdays (Mon-Fri)</option>
-                <option value="weekends">Weekends (Sat-Sun)</option>
-                <option value="custom">Custom</option>
-              </select>
-            </div>
-
-            <!-- Custom Repeat Days (only show when custom is selected) -->
-            <div class="form-group" *ngIf="taskForm.get('repeatType')?.value === 'custom'">
-              <label>Custom Days</label>
-              <div class="days-selector">
-                <label class="day-checkbox" *ngFor="let day of weekDays; let i = index">
-                  <input 
-                    type="checkbox" 
-                    [value]="day.value"
-                    (change)="onDayChange($event, day.value)"
-                    [checked]="selectedDays.includes(day.value)"
-                  />
-                  <span class="checkmark"></span>
-                  {{ day.label }}
-                </label>
-              </div>
-            </div>
-
-            <!-- Repeat Until -->
-            <div class="form-group" *ngIf="taskForm.get('repeatType')?.value && taskForm.get('repeatType')?.value !== ''">
-              <label for="repeatUntil">Repeat Until (Optional)</label>
+              <label for="title">Task Title *</label>
               <input
-                id="repeatUntil"
-                type="date"
-                formControlName="repeatUntil"
-                placeholder="Select end date"
-              />
-              <small class="form-hint">Leave empty for no end date</small>
-            </div>
-
-            <!-- Repeat Interval -->
-            <div class="form-group" *ngIf="taskForm.get('repeatType')?.value && taskForm.get('repeatType')?.value !== '' && taskForm.get('repeatType')?.value !== 'custom'">
-              <label for="repeatInterval">Repeat Every</label>
-              <div class="interval-input">
-                <input
-                  id="repeatInterval"
-                  type="number"
-                  formControlName="repeatInterval"
-                  min="1"
-                  max="365"
-                  placeholder="1"
+                id="title"
+                type="text"
+                formControlName="title"
+                [class.invalid]="isFieldInvalid('title')"
+                placeholder="Enter task title"
                 />
-                <span class="interval-label">{{ getIntervalLabel() }}</span>
+                @if (isFieldInvalid('title')) {
+                  <div class="error-message">
+                    {{ getFieldErrorMessage('title') }}
+                  </div>
+                }
               </div>
-              <small class="form-hint">Example: Every 2 weeks, Every 3 days</small>
-            </div>
-          </div>
-
-          <div class="form-actions">
-            <button type="button" class="btn-cancel" (click)="onClose()">
-              Cancel
-            </button>
-            <button 
-              type="submit" 
-              class="btn-save" 
-              [disabled]="isLoading || !taskForm.valid"
-            >
-              {{ isLoading ? 'Saving...' : (isEditMode ? 'Update' : 'Create') }}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  `,
+              <div class="form-group">
+                <label for="note">Note</label>
+                <textarea
+                  id="note"
+                  formControlName="note"
+                  rows="3"
+                  placeholder="Enter task description"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="duedate">Due Date</label>
+                <input
+                  id="duedate"
+                  type="datetime-local"
+                  formControlName="duedate"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="assigned">Assigned To</label>
+                  <input
+                    id="assigned"
+                    type="text"
+                    formControlName="assigned"
+                    placeholder="Enter assignee"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="owner">Owner</label>
+                    <input
+                      id="owner"
+                      type="text"
+                      formControlName="owner"
+                      placeholder="Enter owner"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="list">List</label>
+                      <select id="list" formControlName="list">
+                        <option value="">Select a list</option>
+                        @for (list of availableLists; track list) {
+                          <option [value]="list.id">
+                            {{ list.name }}
+                          </option>
+                        }
+                      </select>
+                    </div>
+                    <!-- Schedule Section -->
+                    <div class="form-section">
+                      <h4 class="section-title">Schedule</h4>
+                      <div class="form-row">
+                        <div class="form-group">
+                          <label for="startTime">Start Time</label>
+                          <input
+                            id="startTime"
+                            type="time"
+                            formControlName="startTime"
+                            placeholder="10:00"
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label for="endTime">End Time</label>
+                            <input
+                              id="endTime"
+                              type="time"
+                              formControlName="endTime"
+                              placeholder="15:00"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Repeat Section -->
+                        <div class="form-section">
+                          <h4 class="section-title">Repeat Options</h4>
+                          <div class="form-group">
+                            <label for="repeatType">Repeat</label>
+                            <select id="repeatType" formControlName="repeatType">
+                              <option value="">No repeat</option>
+                              <option value="daily">Daily</option>
+                              <option value="weekly">Weekly</option>
+                              <option value="monthly">Monthly</option>
+                              <option value="yearly">Yearly</option>
+                              <option value="workdays">Workdays (Mon-Fri)</option>
+                              <option value="weekends">Weekends (Sat-Sun)</option>
+                              <option value="custom">Custom</option>
+                            </select>
+                          </div>
+                          <!-- Custom Repeat Days (only show when custom is selected) -->
+                          @if (taskForm.get('repeatType')?.value === 'custom') {
+                            <div class="form-group">
+                              <label>Custom Days</label>
+                              <div class="days-selector">
+                                @for (day of weekDays; track day; let i = $index) {
+                                  <label class="day-checkbox">
+                                    <input
+                                      type="checkbox"
+                                      [value]="day.value"
+                                      (change)="onDayChange($event, day.value)"
+                                      [checked]="selectedDays.includes(day.value)"
+                                      />
+                                      <span class="checkmark"></span>
+                                      {{ day.label }}
+                                    </label>
+                                  }
+                                </div>
+                              </div>
+                            }
+                            <!-- Repeat Until -->
+                            @if (taskForm.get('repeatType')?.value && taskForm.get('repeatType')?.value !== '') {
+                              <div class="form-group">
+                                <label for="repeatUntil">Repeat Until (Optional)</label>
+                                <input
+                                  id="repeatUntil"
+                                  type="date"
+                                  formControlName="repeatUntil"
+                                  placeholder="Select end date"
+                                  />
+                                  <small class="form-hint">Leave empty for no end date</small>
+                                </div>
+                              }
+                              <!-- Repeat Interval -->
+                              @if (taskForm.get('repeatType')?.value && taskForm.get('repeatType')?.value !== '' && taskForm.get('repeatType')?.value !== 'custom') {
+                                <div class="form-group">
+                                  <label for="repeatInterval">Repeat Every</label>
+                                  <div class="interval-input">
+                                    <input
+                                      id="repeatInterval"
+                                      type="number"
+                                      formControlName="repeatInterval"
+                                      min="1"
+                                      max="365"
+                                      placeholder="1"
+                                      />
+                                      <span class="interval-label">{{ getIntervalLabel() }}</span>
+                                    </div>
+                                    <small class="form-hint">Example: Every 2 weeks, Every 3 days</small>
+                                  </div>
+                                }
+                              </div>
+                              <div class="form-actions">
+                                <button type="button" class="btn-cancel" (click)="onClose()">
+                                  Cancel
+                                </button>
+                                <button
+                                  type="submit"
+                                  class="btn-save"
+                                  [disabled]="isLoading || !taskForm.valid"
+                                  >
+                                  {{ isLoading ? 'Saving...' : (isEditMode ? 'Update' : 'Create') }}
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      }
+    `,
     styleUrl: './task-form.component.scss'
 })
 export class TaskFormComponent implements OnInit, OnDestroy {

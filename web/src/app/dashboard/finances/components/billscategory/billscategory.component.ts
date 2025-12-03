@@ -3,13 +3,13 @@ import * as echarts from 'echarts';
 import { FinancesService } from '../../core/services/finances.service';
 import { lastValueFrom } from 'rxjs';
 import { CategoryGraphic } from '../../core/models/CategoryGraphic.model';
-import { CommonModule } from '@angular/common';
+
 import { MoneyFormatPipe } from '../../../../shared/pipes/MoneyFormat.pipe';
 import { TimeAgoPipe } from '../../../../shared/pipes/TimeAgo.pipe';
 
 @Component({
     selector: 'app-billscategory',
-    imports: [CommonModule, MoneyFormatPipe, TimeAgoPipe],
+    imports: [MoneyFormatPipe, TimeAgoPipe],
     templateUrl: './billscategory.component.html',
     styleUrl: './billscategory.component.scss'
 })

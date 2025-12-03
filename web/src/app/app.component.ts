@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NewEventModalComponent } from './components/modals/new-event-modal/new-event-modal.component';
@@ -9,11 +9,7 @@ import { TaskFormComponent } from './dashboard/home/components/tasks/modal/task-
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, CommonModule, NewEventModalComponent, AddcontributionModalComponent, SpinnerComponent,
-        // Modals
-        SubscriptionFormComponent,
-        TaskFormComponent
-    ],
+    imports: [RouterOutlet, NewEventModalComponent, AddcontributionModalComponent, SpinnerComponent, SubscriptionFormComponent, TaskFormComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })

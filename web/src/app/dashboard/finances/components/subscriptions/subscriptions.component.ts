@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Subscription as RxSubscription } from 'rxjs';
 import { Subscription } from '../../core/models/database/Susbcription.model';
 import { Category } from '../../core/models/database/Category.model';
@@ -9,7 +9,7 @@ import { FinancesService } from '../../core/services/finances.service';
 
 @Component({
     selector: 'app-subscriptions',
-    imports: [CommonModule],
+    imports: [],
     template: `
     <div class="subscriptions-container">
       @if (subscriptions.length === 0) {
