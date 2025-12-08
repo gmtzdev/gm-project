@@ -4,10 +4,9 @@ import { NavItem } from '../../shared/models/navitem.model';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-navitem',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  template: `
+    selector: 'app-navitem',
+    imports: [CommonModule, RouterModule],
+    template: `
     <div
       class="navitem"
       [ngClass]="{ collapse: collapse }"
@@ -24,7 +23,7 @@ import { RouterModule } from '@angular/router';
       </div>
     </div>
   `,
-  styleUrl: './navitem.component.scss',
+    styleUrl: './navitem.component.scss'
 })
 export class NavitemComponent {
   @Input() collapse: boolean = true;

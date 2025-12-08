@@ -17,7 +17,6 @@
   "description": "",
   "proxy": "http://localhost:3000",
   "dependencies": {
-  },
-  "devDependencies": {
+    "rxjs": "^7.8.1"
   }
 }

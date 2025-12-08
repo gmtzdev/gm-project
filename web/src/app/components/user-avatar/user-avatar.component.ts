@@ -4,11 +4,10 @@ import { AuthService, User } from '../../auth/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-user-avatar',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './user-avatar.component.html',
-  styleUrl: './user-avatar.component.scss'
+    selector: 'app-user-avatar',
+    imports: [CommonModule],
+    templateUrl: './user-avatar.component.html',
+    styleUrl: './user-avatar.component.scss'
 })
 export class UserAvatarComponent implements OnInit {
   @Input() size: 'small' | 'medium' | 'large' = 'medium';

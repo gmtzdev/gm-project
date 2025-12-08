@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { ProfileService } from './profile.service';
 import { UserProfile, UserStats, UserActivity, QuickAction } from './profile.interface';
@@ -15,38 +15,35 @@ import { TagModule } from 'primeng/tag';
 import { TimelineModule } from 'primeng/timeline';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+// import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TooltipModule } from 'primeng/tooltip';
-import { TabViewModule } from 'primeng/tabview';
+// import { TabViewModule } from 'primeng/tabview';
 import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
-  selector: 'app-profile',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    CardModule,
-    ButtonModule,
-    AvatarModule,
-    BadgeModule,
-    ChartModule,
+    selector: 'app-profile',
+    imports: [
+      FormsModule,
+      CardModule,
+      ButtonModule,
+      AvatarModule,
+      BadgeModule,
+      ChartModule,
     TableModule,
     TagModule,
     TimelineModule,
     DialogModule,
     InputTextModule,
-    InputTextareaModule,
     FileUploadModule,
     ProgressBarModule,
     TooltipModule,
-    TabViewModule,
+    // TabViewModule,
     SkeletonModule
-  ],
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+],
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
   userProfile = signal<UserProfile | null>(null);

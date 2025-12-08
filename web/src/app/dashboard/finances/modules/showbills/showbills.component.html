@@ -157,10 +157,11 @@
                             <p-sortIcon field="paymentColumn" />
                             <p-columnFilter field="paymentColumn" matchMode="equals" display="menu" class="ml-auto">
                                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <!-- TODO Buscar que pasa con esas opciones -->
+                                    <!-- [options]="paymentsOptions"  -->
+                                    <!-- (onChange)="filter($event.value)"  -->
                                     <p-dropdown 
                                         [(ngModel)]="payMethod" 
-                                        [options]="paymentsOptions" 
-                                        (onChange)="filter($event.value)" 
                                         placeholder="Any" 
                                         class="filter-dropdown">
 

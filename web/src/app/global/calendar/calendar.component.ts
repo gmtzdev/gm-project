@@ -6,11 +6,10 @@ import { DateModalService } from '../../shared/services/modals/date-modal.servic
 import { TaskService } from '../../shared/services/global/task.service';
 
 @Component({
-  selector: 'app-calendar',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.scss',
+    selector: 'app-calendar',
+    imports: [CommonModule],
+    templateUrl: './calendar.component.html',
+    styleUrl: './calendar.component.scss'
 })
 export class CalendarComponent implements OnInit {
   week = [

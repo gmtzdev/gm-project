@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NewEventModalComponent } from './components/modals/new-event-modal/new-event-modal.component';
@@ -8,16 +8,10 @@ import { SubscriptionFormComponent } from './dashboard/finances/components/subsc
 import { TaskFormComponent } from './dashboard/home/components/tasks/modal/task-form.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, CommonModule, NewEventModalComponent, AddcontributionModalComponent, SpinnerComponent,
-
-    // Modals
-    SubscriptionFormComponent,
-    TaskFormComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [RouterOutlet, NewEventModalComponent, AddcontributionModalComponent, SpinnerComponent, SubscriptionFormComponent, TaskFormComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   title = 'gm-project';

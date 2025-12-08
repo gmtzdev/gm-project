@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckboxModule } from 'primeng/checkbox';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
+// TODO Buscar un replazo para OverlayPanelModule
+// import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TaskService } from '../../core/service/task.service';
 import { Task } from '../../core/models/database/Task.model';
 import { HttpResponse } from '../../../../shared/models/http/HttpResponse.model';
@@ -22,19 +23,18 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-todolist',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CheckboxModule,
-    OverlayPanelModule,
-    CommonModule,
-    ToastModule
-  ],
-  providers: [MessageService],
-  templateUrl: './todolist.component.html',
-  styleUrl: './todolist.component.scss',
+    selector: 'app-todolist',
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CheckboxModule,
+        // OverlayPanelModule,
+        CommonModule,
+        ToastModule
+    ],
+    providers: [MessageService],
+    templateUrl: './todolist.component.html',
+    styleUrl: './todolist.component.scss'
 })
 export class TodolistComponent implements OnInit {
   private selectedList!: List;

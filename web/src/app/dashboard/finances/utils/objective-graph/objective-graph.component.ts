@@ -4,11 +4,10 @@ import { FinancesService } from '../../core/services/finances.service';
 import { AddContributionModalService } from '../../../../shared/services/modals/add-contribution-modal.service';
 
 @Component({
-  selector: 'app-objective-graph',
-  standalone: true,
-  imports: [],
-  templateUrl: './objective-graph.component.html',
-  styleUrl: './objective-graph.component.scss',
+    selector: 'app-objective-graph',
+    imports: [],
+    templateUrl: './objective-graph.component.html',
+    styleUrl: './objective-graph.component.scss'
 })
 export class ObjectiveGraphComponent implements OnInit {
   @Input() id: number = 0;

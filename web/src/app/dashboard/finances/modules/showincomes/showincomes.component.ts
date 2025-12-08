@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { DropdownModule } from 'primeng/dropdown';
+// TODO Buscar un replazo para DropdownModule
+// import { DropdownModule } from 'primeng/dropdown';
 import { TagModule } from 'primeng/tag';
 import { SliderModule } from 'primeng/slider';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -13,23 +14,23 @@ import { Income } from '../../core/models/database/Income.model';
 import { Origin } from '../../core/models/database/Origin.model';
 
 @Component({
-  selector: 'app-showincomes',
-  standalone: true,
-  imports: [
-    TableModule,
-    MultiSelectModule,
-    DropdownModule,
-    TagModule,
-    SliderModule,
-    ProgressBarModule,
-    CommonModule,
-    FormsModule,
-  ],
-  templateUrl: './showincomes.component.html',
-  styleUrls: [
-    './showincomes.component.scss',
-    '/src/app/core/styles/primeng/table.scss',
-  ],
+    selector: 'app-showincomes',
+    imports: [
+        TableModule,
+        MultiSelectModule,
+        // DropdownModule,
+        TagModule,
+        SliderModule,
+        ProgressBarModule,
+        CommonModule,
+        FormsModule,
+    ],
+    templateUrl: './showincomes.component.html',
+    styleUrls: [
+        './showincomes.component.scss',
+        // '/src/app/core/styles/primeng/table.scss',
+        '../../../../core/styles/primeng/table.scss',
+    ]
 })
 export class ShowincomesComponent implements OnInit {
   incomes!: Income[];

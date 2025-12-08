@@ -13,11 +13,10 @@ import { SuccessModal } from '../../../../shared/classes/modals/SuccessModal';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @Component({
-  selector: 'app-addcategory',
-  standalone: true,
-  imports: [ReactiveFormsModule, AutocompleteLibModule],
-  templateUrl: './addcategory.component.html',
-  styleUrl: './addcategory.component.scss',
+    selector: 'app-addcategory',
+    imports: [ReactiveFormsModule, AutocompleteLibModule],
+    templateUrl: './addcategory.component.html',
+    styleUrl: './addcategory.component.scss'
 })
 export class AddcategoryComponent {
   keyword: string = 'name';

@@ -1,7 +1,8 @@
 /* PrimeNG */
 import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { DropdownModule } from 'primeng/dropdown';
+// TODO Buscar un replazo para DropdownModule
+// import { DropdownModule } from 'primeng/dropdown';
 import { Tag, TagModule } from 'primeng/tag';
 import { SliderModule } from 'primeng/slider';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -25,27 +26,27 @@ import { MessageService } from 'primeng/api';
 import { BillMetrics } from '../../core/classes/BillMetrics';
 
 @Component({
-  selector: 'app-showbills',
-  standalone: true,
-  imports: [
-    TableModule,
-    MultiSelectModule,
-    DropdownModule,
-    TagModule,
-    SliderModule,
-    ProgressBarModule,
-    CommonModule,
-    FormsModule,
-    DialogModule,
-    ButtonModule,
-    ToastModule,
-  ],
-  templateUrl: './showbills.component.html',
-  styleUrls: [
-    './showbills.component.scss',
-    '/src/app/core/styles/primeng/table.scss',
-  ],
-  providers: [MessageService],
+    selector: 'app-showbills',
+    imports: [
+        TableModule,
+        MultiSelectModule,
+        // DropdownModule,
+        TagModule,
+        SliderModule,
+        ProgressBarModule,
+        CommonModule,
+        FormsModule,
+        DialogModule,
+        ButtonModule,
+        ToastModule,
+    ],
+    templateUrl: './showbills.component.html',
+    styleUrls: [
+        './showbills.component.scss',
+        // './/src/app/core/styles/primeng/table.scss',
+        '../../../../core/styles/primeng/table.scss',
+    ],
+    providers: [MessageService]
 })
 export class ShowbillsComponent {
   bills!: BillToTable[];

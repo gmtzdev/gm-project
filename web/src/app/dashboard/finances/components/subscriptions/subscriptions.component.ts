@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Subscription as RxSubscription } from 'rxjs';
 import { Subscription } from '../../core/models/database/Susbcription.model';
 import { Category } from '../../core/models/database/Category.model';
@@ -8,10 +8,9 @@ import { FinancesService } from '../../core/services/finances.service';
 
 
 @Component({
-  selector: 'app-subscriptions',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'app-subscriptions',
+    imports: [],
+    template: `
     <div class="subscriptions-container">
       @if (subscriptions.length === 0) {
         <div class="empty-state">
@@ -92,7 +91,7 @@ import { FinancesService } from '../../core/services/finances.service';
       
     </div>
   `,
-  styleUrl: './subscriptions.component.scss'
+    styleUrl: './subscriptions.component.scss'
 })
 export class SubscriptionsComponent implements OnInit, OnDestroy {
   public currency = '$';

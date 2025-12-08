@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+// import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CardComponent } from '../../components/card/card.component';
 import { IncomesyearComponent } from '../../components/incomesyear/incomesyear.component';
 import { ObjetivesComponent } from '../../components/objetives/objetives.component';
@@ -15,12 +15,11 @@ import { FormsModule } from '@angular/forms';
 import { DatesService } from '../../../../shared/services/global/dates.service';
 import { SubscriptionsComponent } from '../../components/subscriptions/subscriptions.component';
 import { SubscriptionModalService } from '../../components/subscriptions/modal/service/subscription-modal.service';
-import { SubscriptionFormComponent } from '../../components/subscriptions/modal/subscription-form.component';
+
 
 @Component({
-  selector: 'app-homefinances',
-  standalone: true,
-  imports: [
+    selector: 'app-homefinances',
+    imports: [
     CardComponent,
     IncomesyearComponent,
     ExpensesweekComponent,
@@ -28,15 +27,11 @@ import { SubscriptionFormComponent } from '../../components/subscriptions/modal/
     BillscategoryComponent,
     DebtsComponent,
     SubscriptionsComponent,
-    
-    FormsModule,
-    NgxChartsModule,
-
-    // Modals
-    SubscriptionFormComponent,
-  ],
-  templateUrl: './homefinances.component.html',
-  styleUrl: './homefinances.component.scss',
+    FormsModule
+],
+    templateUrl: './homefinances.component.html',
+    styleUrl: './homefinances.component.scss',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomefinancesComponent implements OnInit {
   private incomeIndex = 0;

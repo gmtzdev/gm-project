@@ -12,11 +12,10 @@ import { lastValueFrom } from 'rxjs';
 import { SuccessModal } from '../../../../shared/classes/modals/SuccessModal';
 
 @Component({
-  selector: 'app-addinstitution',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './addinstitution.component.html',
-  styleUrl: './addinstitution.component.scss',
+    selector: 'app-addinstitution',
+    imports: [ReactiveFormsModule],
+    templateUrl: './addinstitution.component.html',
+    styleUrl: './addinstitution.component.scss'
 })
 export class AddinstitutionComponent {
   keyword: string = 'name';

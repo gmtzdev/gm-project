@@ -15,11 +15,10 @@ import { ErrorModal } from '../../../../shared/classes/modals/ErrorModal';
 import { HttpResponse } from '../../../../shared/models/http/HttpResponse.model';
 
 @Component({
-  selector: 'app-addincome',
-  standalone: true,
-  imports: [ReactiveFormsModule, AutocompleteLibModule],
-  templateUrl: './addincome.component.html',
-  styleUrl: './addincome.component.scss',
+    selector: 'app-addincome',
+    imports: [ReactiveFormsModule, AutocompleteLibModule],
+    templateUrl: './addincome.component.html',
+    styleUrl: './addincome.component.scss'
 })
 export class AddincomeComponent implements OnInit {
   public origins: Origin[] = [];
