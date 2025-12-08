@@ -18,7 +18,7 @@ import { RouterModule } from '@angular/router';
         <i class="pi {{ navItem.icon }}"></i>
       </div>
 
-      <div class="title" [ngClass]="{ dn: collapse }">
+      <div class="title" [ngClass]="{ 'dn': collapse }">
         <span>{{ navItem.title }}</span>
       </div>
     </div>

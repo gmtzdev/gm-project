@@ -1,5 +1,5 @@
 .dn {
-    display: none;
+    display: none!important;
 }
 
 .navitem {
@@ -12,9 +12,10 @@
 
     .icon {
         width: 30px;
-        font-size: 0.9rem;
+        height: 30px;
+        border-radius: 8px;
         padding: 7px 5px;
-        border-radius: 10px;
+        font-size: 0.9rem;
         display: grid;
         place-items: center;
         transition: all 0.5s ease;
@@ -35,21 +36,16 @@
 
 .navitem:hover {
     .icon {
-        background-color: rgb(203, 152, 3);
+        background-color: rgb(59, 60, 66);
         box-shadow: 0px 0px 4px rgba(255, 255, 255, 1);
-        
-        // width: 30px;
-        // height: 29px;
-        
-        
         transition: all 0.5s ease;
     }
 }
 
 .navitem.active{
     .icon {
-        background-color: rgb(203, 152, 3);
-        box-shadow: 0px 0px 4px rgba(255, 255, 255, 1);
+        background-color: rgb(59, 60, 66);
+        // box-shadow: 0px 0px 4px rgba(255, 255, 255, 1);
         // width: 47px;
         // height: 33px;
         
@@ -67,11 +63,12 @@
     
         .icon {
             width: 30px;
-            font-size: 0.9rem;
+            height: 30px;
+            border-radius: 8px;
             padding: 7px 5px;
-            border-radius: 10px;
             display: grid;
             place-items: center;
+            font-size: 0.9rem;
             transition: all 0.5s ease;
         }
     
@@ -90,24 +87,16 @@
     
     .navitem:hover {
         .icon {
-            background-color: rgb(203, 152, 3);
-            box-shadow: 0px 0px 4px rgba(255, 255, 255, 1);
-            
-            // width: 30px;
-            // height: 29px;
-            
-            
+            background-color: #3b3c4220;
+            box-shadow: 0px 0px 3px rgba(255, 255, 255, 1);
             transition: all 0.5s ease;
         }
     }
     
     .navitem.active{
         .icon {
-            background-color: rgb(203, 152, 3);
-            box-shadow: 0px 0px 4px rgba(255, 255, 255, 1);
-            // width: 47px;
-            // height: 33px;
-            
+            background-color: #3b3c4220;
+            box-shadow: 0px 0px 3px rgba(255, 255, 255, 1);
         }
     }
 }
