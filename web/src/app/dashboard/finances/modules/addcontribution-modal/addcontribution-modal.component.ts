@@ -7,7 +7,8 @@ import {
 } from '@angular/forms';
 import { AddContributionModalService } from '../../../../shared/services/modals/add-contribution-modal.service';
 import { CheckboxModule } from 'primeng/checkbox';
-import { InputSwitchModule } from 'primeng/inputswitch';
+// TODO Buscar un replazo para InputSwitchModule
+// import { InputSwitchModule } from 'primeng/inputswitch';
 import { DatesService } from '../../../../shared/services/global/dates.service';
 import { ErrorModal } from '../../../../shared/classes/modals/ErrorModal';
 import { FinancesService } from '../../core/services/finances.service';
@@ -15,7 +16,7 @@ import { HttpResponse } from '../../../../shared/models/http/HttpResponse.model'
 
 @Component({
     selector: 'app-addcontribution-modal',
-    imports: [InputSwitchModule, CheckboxModule, ReactiveFormsModule],
+    imports: [CheckboxModule, ReactiveFormsModule],
     templateUrl: './addcontribution-modal.component.html',
     styleUrl: './addcontribution-modal.component.scss'
 })

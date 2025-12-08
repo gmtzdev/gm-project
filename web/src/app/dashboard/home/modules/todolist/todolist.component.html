@@ -75,10 +75,10 @@
                     <input type="text" formControlName="title" (keypress)="this.saveNewTask($event)">
 
                     <div class="todo-add-task-operation">
-                        <i class="fa-solid {{this.createTaskDto.controls['list'].value.icon}}" (click)="lo.toggle($event)"></i>
+                        <!-- <i class="fa-solid {{this.createTaskDto.controls['list'].value.icon}}" (click)="lo.toggle($event)"></i>
                         <i class="fa-solid fa-calendar-days" (click)="co.toggle(help($event))"></i>
                         <i class="fa-regular fa-clock" (click)="mo.toggle($event)"></i>
-                        <i class="fa-solid fa-repeat" (click)="ro.toggle($event)"></i>
+                        <i class="fa-solid fa-repeat" (click)="ro.toggle($event)"></i> -->
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
     </footer>
 </section>
 
-<p-overlayPanel #co [style]="{'margin-left': '-12px', 'width':'150px'}"></p-overlayPanel>
+<!-- <p-overlayPanel #co [style]="{'margin-left': '-12px', 'width':'150px'}"></p-overlayPanel>
 <p-overlayPanel #mo [style]="{'margin-left': '-12px', 'width':'200px'}"></p-overlayPanel>
 <p-overlayPanel #ro [style]="{'margin-left': '-12px', 'width':'200px'}"></p-overlayPanel>
 <p-overlayPanel #lo [style]="{'margin-left': '-12px', 'width':'200px'}">
@@ -100,6 +100,6 @@
             </li>
         }
     </ul>
-</p-overlayPanel>
+</p-overlayPanel> -->
 
 <p-toast />

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
-import { InputSwitchModule } from 'primeng/inputswitch';
+// TODO Buscar un replazo para InputSwitchModule
+// import { InputSwitchModule } from 'primeng/inputswitch';
 import { CheckboxModule } from 'primeng/checkbox';
 import {
   FormControl,
@@ -12,7 +13,11 @@ import { DateModalService } from '../../../shared/services/modals/date-modal.ser
 
 @Component({
     selector: 'app-new-event-modal',
-    imports: [InputSwitchModule, CheckboxModule, ReactiveFormsModule],
+    imports: [
+      //InputSwitchModule, 
+      CheckboxModule, 
+      ReactiveFormsModule
+    ],
     templateUrl: './new-event-modal.component.html',
     styleUrl: './new-event-modal.component.scss'
 })

@@ -1,7 +1,8 @@
 /* PrimeNG */
 import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { DropdownModule } from 'primeng/dropdown';
+// TODO Buscar un replazo para DropdownModule
+// import { DropdownModule } from 'primeng/dropdown';
 import { Tag, TagModule } from 'primeng/tag';
 import { SliderModule } from 'primeng/slider';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -29,7 +30,7 @@ import { BillMetrics } from '../../core/classes/BillMetrics';
     imports: [
         TableModule,
         MultiSelectModule,
-        DropdownModule,
+        // DropdownModule,
         TagModule,
         SliderModule,
         ProgressBarModule,

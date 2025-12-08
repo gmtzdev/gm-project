@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckboxModule } from 'primeng/checkbox';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
+// TODO Buscar un replazo para OverlayPanelModule
+// import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TaskService } from '../../core/service/task.service';
 import { Task } from '../../core/models/database/Task.model';
 import { HttpResponse } from '../../../../shared/models/http/HttpResponse.model';
@@ -27,7 +28,7 @@ import { MessageService } from 'primeng/api';
         ReactiveFormsModule,
         FormsModule,
         CheckboxModule,
-        OverlayPanelModule,
+        // OverlayPanelModule,
         CommonModule,
         ToastModule
     ],

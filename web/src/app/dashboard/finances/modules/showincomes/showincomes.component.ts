@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { DropdownModule } from 'primeng/dropdown';
+// TODO Buscar un replazo para DropdownModule
+// import { DropdownModule } from 'primeng/dropdown';
 import { TagModule } from 'primeng/tag';
 import { SliderModule } from 'primeng/slider';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -17,7 +18,7 @@ import { Origin } from '../../core/models/database/Origin.model';
     imports: [
         TableModule,
         MultiSelectModule,
-        DropdownModule,
+        // DropdownModule,
         TagModule,
         SliderModule,
         ProgressBarModule,

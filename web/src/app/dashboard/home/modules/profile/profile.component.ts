@@ -25,12 +25,12 @@ import { SkeletonModule } from 'primeng/skeleton';
 @Component({
     selector: 'app-profile',
     imports: [
-    FormsModule,
-    CardModule,
-    ButtonModule,
-    AvatarModule,
-    BadgeModule,
-    ChartModule,
+      FormsModule,
+      CardModule,
+      ButtonModule,
+      AvatarModule,
+      BadgeModule,
+      ChartModule,
     TableModule,
     TagModule,
     TimelineModule,
